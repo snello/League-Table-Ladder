@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Football Ladder</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+        <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            :root {
+                --bg: #0e0018;
+                --rail-color: #d4af37;
+                --rung-empty: rgba(212, 175, 55, 0.15);
+                --rung-filled: rgba(212, 175, 55, 0.8);
+                --badge-size: 38px;
+                --rung-h: 22px;
+                --rung-h-occ: 36px;
+                --label-w: 32px;
+                --rail-w: 6px;
+                --font: "Inter", -apple-system, sans-serif;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background: var(--bg);
+                color: #fff;
+                font-family: var(--font);
+                min-height: 100vh;
+                overflow-x: hidden;
+            }
+
+            /* ── Header ── */
+            .page-header {
+                position: sticky;
+                top: 0;
+                z-index: 20;
+                background: rgba(14, 0, 24, 0.96);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+                padding: 10px 16px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .league-emblem {
+                width: 38px;
+                height: 38px;
+                flex-shrink: 0;
+                object-fit: contain;
+            }
+
+            .league-select {
+                background: transparent;
+                border: none;
+                color: #fff;
+                font-family: 'Inter', sans-serif;
+                font-size: 15px;
+                font-weight: 800;
+                letter-spacing: 0.2px;
+                line-height: 1;
+                cursor: pointer;
+                outline: none;
+                padding: 0 18px 0 0;
+                -webkit-appearance: none;
+                appearance: none;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%23d4af37' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: right 2px center;
+                max-width: 100%;
+            }
+
+            .league-select option {
+                background: #1a0030;
+                color: #fff;
+                font-weight: 600;
+            }
+
+            .header-text p {
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.45);
+                margin-top: 3px;
+            }
+
+            /* ── Scroll hint ── */
+            .hint {
+                text-align: center;
+                padding: 5px 16px 2px;
+                font-size: 10px;
+                color: rgba(255, 255, 255, 0.3);
+                letter-spacing: 0.3px;
+            }
+
+            /* ── Ladder wrapper ── */
+            .ladder-outer {
+                display: flex;
+                justify-content: center;
+                padding: 4px 14px 180px;
+            }
+
+            .ladder {
+                position: relative;
+                width: 100%;
+                max-width: 580px;
+            }
+
+            /* Rails */
+            .rails {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: var(--label-w);
+                right: 0;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            .rail {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: var(--rail-w);
+                background: linear-gradient(to bottom, rgba(212, 175, 55, 0.3), var(--rail-color) 20%, var(--rail-color) 80%, rgba(212, 175, 55, 0.3));
+                border-radius: 3px;
+            }
+            .rail-l {
+                left: 0;
+            }
+            .rail-r {
+                right: 0;
+            }
+
+            /* ── Rungs ── */
+            #rungs {
+                position: relative;
+                z-index: 1;
+            }
+
+            .rung {
+                display: flex;
+                align-items: center;
+                min-height: var(--rung-h);
+            }
+
+            .rung.occ {
+                min-height: var(--rung-h-occ);
+            }
+
+            .rung-lbl {
+                width: var(--label-w);
+                flex-shrink: 0;
+                text-align: right;
+                padding-right: 7px;
+                font-size: 14px;
+                font-weight: 700;
+                color: rgba(255, 255, 255, 0.75);
+                user-select: none;
+                text-shadow:
+                    0 0 8px rgba(0, 0, 0, 1),
+                    0 1px 4px rgba(0, 0, 0, 1),
+                    -1px 0 3px rgba(0, 0, 0, 1);
+            }
+
+            .rung.occ .rung-lbl {
+                font-size: 14px;
+                font-weight: 800;
+                color: var(--rail-color);
+                text-shadow:
+                    0 0 10px rgba(0, 0, 0, 1),
+                    0 0 5px rgba(212, 175, 55, 0.5),
+                    -1px 0 3px rgba(0, 0, 0, 1);
+            }
+
+            .rung-bar {
+                flex: 1;
+                align-self: stretch;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                position: relative;
+            }
+
+            /* Horizontal rung line */
+            .rung-bar::before {
+                content: "";
+                position: absolute;
+                left: var(--rail-w);
+                right: var(--rail-w);
+                top: 50%;
+                transform: translateY(-50%);
+                height: 2px;
+                background: var(--rung-empty);
+                pointer-events: none;
+            }
+
+            .rung.occ .rung-bar::before {
+                height: 3px;
+                background: var(--rung-filled);
+                box-shadow: 0 0 8px rgba(212, 175, 55, 0.45);
+            }
+
+            /* ── Team token ── */
+            .token {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+                cursor: pointer;
+                position: relative;
+                z-index: 2;
+                -webkit-tap-highlight-color: transparent;
+                user-select: none;
+                transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            .token:hover {
+                transform: translateY(-4px) scale(1.07);
+            }
+            .token:active {
+                transform: scale(0.93);
+            }
+
+            .badge-ring {
+                width: calc(var(--badge-size) + 8px);
+                height: calc(var(--badge-size) + 8px);
+                border-radius: 50%;
+                background: #fff;
+                border: 3px solid transparent; /* set via JS */
+                box-shadow:
+                    0 0 12px transparent,
+                    0 2px 8px rgba(0, 0, 0, 0.5); /* set via JS */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .badge-img {
+                width: var(--badge-size);
+                height: var(--badge-size);
+                object-fit: contain;
+                display: block;
+            }
+
+            .badge-fallback {
+                width: var(--badge-size);
+                height: var(--badge-size);
+                border-radius: 50%;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: 800;
+                color: #fff;
+            }
+
+            .token-name {
+                font-size: 9px;
+                font-weight: 600;
+                text-align: center;
+                max-width: 58px;
+                line-height: 1.2;
+                color: rgba(255, 255, 255, 0.85);
+                text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+            }
+
+            .token-pos {
+                position: absolute;
+                top: -4px;
+                right: -6px;
+                min-width: 16px;
+                height: 16px;
+                padding: 0 3px;
+                border-radius: 8px;
+                background: #0e0018;
+                border: 1px solid rgba(212, 175, 55, 0.5);
+                font-size: 9px;
+                font-weight: 800;
+                color: var(--rail-color);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+                z-index: 4;
+                pointer-events: none;
+            }
+
+            .token-status {
+                position: absolute;
+                bottom: 14px;
+                right: -6px;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                font-size: 9px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+                z-index: 4;
+                pointer-events: none;
+            }
+            .token-status.champion {
+                background: #052e16;
+                border: 1px solid #4ade80;
+                color: #4ade80;
+            }
+            .token-status.relegated {
+                background: #2d0a0a;
+                border: 1px solid #f87171;
+                color: #f87171;
+            }
+
+            /* ── Safety line ── */
+            .rung.safe-line .rung-lbl {
+                color: #10b981;
+                font-weight: 800;
+                font-size: 10px;
+                text-shadow:
+                    0 0 8px rgba(0, 0, 0, 1),
+                    0 0 4px rgba(16, 185, 129, 0.4);
+            }
+
+            .rung.safe-line .rung-bar::before {
+                height: 4px;
+                background: #10b981;
+                box-shadow: 0 0 14px rgba(16, 185, 129, 0.75);
+            }
+
+            .safe-tag:hover,
+            .safe-form-tag:hover,
+            .wisdom-tag:hover {
+                filter: brightness(1.3);
+            }
+
+            .safe-tag {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: calc(var(--rail-w) + 6px);
+                font-size: 13px;
+                font-weight: 800;
+                color: white;
+                text-transform: uppercase;
+                letter-spacing: 0.6px;
+                white-space: nowrap;
+                background: rgba(16, 185, 129, 0.12);
+                border: 1px solid rgba(16, 185, 129, 0.4);
+                padding: 2px 5px;
+                border-radius: 4px;
+                z-index: 3;
+            }
+
+            /* ── Safety by form line ── */
+            .rung.safe-form-line .rung-lbl {
+                color: #22d3ee;
+                font-weight: 800;
+                font-size: 10px;
+                text-shadow:
+                    0 0 8px rgba(0, 0, 0, 1),
+                    0 0 4px rgba(34, 211, 238, 0.4);
+            }
+
+            .rung.safe-form-line .rung-bar::before {
+                height: 4px;
+                background: #22d3ee;
+                box-shadow: 0 0 14px rgba(34, 211, 238, 0.75);
+            }
+
+            .safe-form-tag {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: calc(var(--rail-w) + 6px);
+                font-size: 13px;
+                font-weight: 800;
+                color: white;
+                text-transform: uppercase;
+                letter-spacing: 0.6px;
+                white-space: nowrap;
+                background: rgba(34, 211, 238, 0.12);
+                border: 1px solid rgba(34, 211, 238, 0.4);
+                padding: 2px 5px;
+                border-radius: 4px;
+                z-index: 3;
+            }
+
+            /* ── Wisdom line (40 pts) ── */
+            .rung.wisdom-line .rung-lbl {
+                color: #f59e0b;
+                font-weight: 800;
+                font-size: 10px;
+                text-shadow:
+                    0 0 8px rgba(0, 0, 0, 1),
+                    0 0 4px rgba(245, 158, 11, 0.4);
+            }
+
+            .rung.wisdom-line .rung-bar::before {
+                height: 4px;
+                background: #f59e0b;
+                box-shadow: 0 0 14px rgba(245, 158, 11, 0.75);
+            }
+
+            .wisdom-tag {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: calc(var(--rail-w) + 6px);
+                font-size: 13px;
+                font-weight: 800;
+                color: white;
+                text-transform: uppercase;
+                letter-spacing: 0.6px;
+                white-space: nowrap;
+                background: rgba(245, 158, 11, 0.12);
+                border: 1px solid rgba(245, 158, 11, 0.4);
+                padding: 2px 5px;
+                border-radius: 4px;
+                z-index: 3;
+            }
+
+            /* ── Zone bands ── */
+            .zone-ucl {
+                position: absolute;
+                left: var(--label-w);
+                right: 0;
+                background: rgba(0, 80, 200, 0.06);
+                border-left: 3px solid rgba(0, 130, 255, 0.25);
+                border-right: 3px solid rgba(0, 130, 255, 0.25);
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            .zone-rel {
+                position: absolute;
+                left: var(--label-w);
+                right: 0;
+                background: rgba(220, 0, 0, 0.07);
+                border-left: 3px solid rgba(220, 0, 0, 0.25);
+                border-right: 3px solid rgba(220, 0, 0, 0.25);
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            /* ── Backdrop ── */
+            .backdrop {
+                display: none;
+                position: fixed;
+                inset: 0;
+                z-index: 50;
+                background: rgba(0, 0, 0, 0.5);
+            }
+            .backdrop.on {
+                display: block;
+            }
+
+            /* ── Toast ── */
+            .toast {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 60;
+                background: #1b0030;
+                border-top: 2px solid var(--rail-color);
+                border-radius: 18px 18px 0 0;
+                padding: 0 16px 20px;
+                transform: translateY(100%);
+                transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+                max-width: 580px;
+                margin: 0 auto;
+            }
+            .toast.open {
+                transform: translateY(0);
+            }
+
+            .toast-handle {
+                width: 36px;
+                height: 4px;
+                background: rgba(255, 255, 255, 0.18);
+                border-radius: 2px;
+                margin: 10px auto 14px;
+            }
+
+            .toast-head {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                margin-bottom: 14px;
+            }
+
+            .t-badge-ring {
+                width: 58px;
+                height: 58px;
+                border-radius: 50%;
+                background: #fff;
+                border: 3px solid transparent;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                overflow: hidden;
+            }
+
+            .t-badge-img {
+                width: 48px;
+                height: 48px;
+                object-fit: contain;
+            }
+
+            .t-info {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .t-name {
+                font-size: 17px;
+                font-weight: 800;
+                line-height: 1.15;
+            }
+
+            .t-sub {
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.5);
+                margin-top: 2px;
+            }
+
+            .t-pts {
+                font-size: 26px;
+                font-weight: 800;
+                color: var(--rail-color);
+                line-height: 1;
+            }
+
+            .t-pts-lbl {
+                font-size: 10px;
+                color: rgba(255, 255, 255, 0.4);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                text-align: center;
+            }
+
+            .t-close {
+                width: 30px;
+                height: 30px;
+                background: rgba(255, 255, 255, 0.1);
+                border: none;
+                border-radius: 50%;
+                color: rgba(255, 255, 255, 0.65);
+                font-size: 15px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                transition: background 0.15s;
+                align-self: flex-start;
+            }
+            .t-close:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 6px;
+            }
+
+            .stat {
+                background: rgba(255, 255, 255, 0.07);
+                border-radius: 8px;
+                padding: 8px 4px 6px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .stat-v {
+                font-size: 17px;
+                font-weight: 700;
+                line-height: 1;
+            }
+
+            .stat-v.pos {
+                color: #4ade80;
+            }
+            .stat-v.neg {
+                color: #f87171;
+            }
+
+            .stat-k {
+                font-size: 8px;
+                color: rgba(255, 255, 255, 0.4);
+                text-transform: uppercase;
+                letter-spacing: 0.4px;
+                margin-top: 3px;
+            }
+
+            /* ── Desktop ── */
+            @media (min-width: 580px) {
+                :root {
+                    --badge-size: 48px;
+                    --rung-h: 25px;
+                    --rung-h-occ: 42px;
+                    --label-w: 38px;
+                }
+                .page-header {
+                    padding: 12px 24px;
+                }
+                .league-select {
+                    font-size: 18px;
+                }
+                .ladder-outer {
+                    padding: 6px 24px 200px;
+                }
+                .token-name {
+                    font-size: 10px;
+                    max-width: 72px;
+                }
+                .toast {
+                    left: 50%;
+                    right: auto;
+                    width: 580px;
+                    transform: translateX(-50%) translateY(100%);
+                }
+                .toast.open {
+                    transform: translateX(-50%) translateY(0);
+                }
+                .stats-grid {
+                    grid-template-columns: repeat(6, 1fr);
+                }
+            }
+
+            /* ── Mode tabs ── */
+            .mode-tabs {
+                display: flex;
+                gap: 0;
+                padding: 12px 14px 0;
+                max-width: 580px;
+                margin: 0 auto;
+            }
+            .mode-tab {
+                flex: 1;
+                padding: 9px 0;
+                border: 1px solid rgba(212, 175, 55, 0.25);
+                background: rgba(255, 255, 255, 0.04);
+                color: rgba(255, 255, 255, 0.45);
+                font-family: var(--font);
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                transition:
+                    background 0.2s,
+                    color 0.2s,
+                    border-color 0.2s;
+            }
+            .mode-tab:first-child {
+                border-radius: 8px 0 0 0;
+                border-right: none;
+            }
+            .mode-tab:last-child {
+                border-radius: 0 8px 0 0;
+            }
+            .mode-tab.active {
+                background: rgba(212, 175, 55, 0.13);
+                border-color: var(--rail-color);
+                color: var(--rail-color);
+            }
+            .mode-tab:not(.active):hover {
+                background: rgba(255, 255, 255, 0.07);
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            .form-controls {
+                display: none;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 8px 14px 10px;
+                max-width: 580px;
+                margin: 0 auto;
+                background: rgba(212, 175, 55, 0.07);
+                border: 1px solid rgba(212, 175, 55, 0.25);
+                border-top: none;
+                border-radius: 0 0 8px 8px;
+            }
+            .form-controls.visible {
+                display: flex;
+            }
+            .form-ctrl-label {
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.55);
+            }
+            #formSelect {
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(212, 175, 55, 0.5);
+                border-radius: 6px;
+                color: var(--rail-color);
+                font-family: var(--font);
+                font-size: 13px;
+                font-weight: 700;
+                padding: 4px 10px;
+                cursor: pointer;
+                outline: none;
+                appearance: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="page-header">
+            <img class="league-emblem" id="leagueEmblem" src="" alt="" />
+            <div class="header-text">
+                <select class="league-select" id="leagueSelect"></select>
+                <p id="headerSub">Points Ladder &middot; Loading&hellip;</p>
+            </div>
+        </header>
+
+        <div class="mode-tabs">
+            <button class="mode-tab active" data-mode="current">Current Table</button>
+            <button class="mode-tab" data-mode="final">Final Positions</button>
+        </div>
+        <div class="form-controls" id="formControls">
+            <span class="form-ctrl-label">Using last</span>
+            <select id="formSelect">
+                <option value="1">1 game</option>
+                <option value="2">2 games</option>
+                <option value="3" selected>3 games</option>
+                <option value="4">4 games</option>
+                <option value="5">5 games</option>
+            </select>
+            <span class="form-ctrl-label">of form to project final points</span>
+        </div>
+
+        <p class="hint">Points 0 &ndash; 100 &nbsp;&bull;&nbsp; ↓ Scroll down to see all teams</p>
+
+        <div class="ladder-outer">
+            <div class="ladder" id="ladder">
+                <div class="rails">
+                    <div class="rail rail-l"></div>
+                    <div class="rail rail-r"></div>
+                </div>
+                <div id="rungs"></div>
+            </div>
+        </div>
+
+        <div class="backdrop" id="backdrop" onclick="closeToast()"></div>
+
+        <div class="toast" id="toast" role="dialog" aria-modal="true" aria-label="Team statistics">
+            <div class="toast-handle"></div>
+            <div class="toast-head">
+                <div class="t-badge-ring" id="tRing">
+                    <img class="t-badge-img" id="tImg" src="" alt="" />
+                    <div id="tIcon" style="display: none; font-size: 22px; line-height: 1"></div>
+                </div>
+                <div class="t-info">
+                    <div class="t-name" id="tName">—</div>
+                    <div class="t-sub" id="tSub">—</div>
+                </div>
+                <div style="text-align: center; margin-right: 6px">
+                    <div class="t-pts" id="tPts">—</div>
+                    <div class="t-pts-lbl">pts</div>
+                </div>
+                <div style="text-align: center; margin-right: 6px">
+                    <div class="t-pts" id="tPlayed" style="font-size: 20px">—</div>
+                    <div class="t-pts-lbl" id="tPlayedLbl">played</div>
+                </div>
+                <button class="t-close" onclick="closeToast()" aria-label="Close">✕</button>
+            </div>
+            <div class="stats-grid" id="statsGrid"></div>
+        </div>
+
+        <script>
+            // ─── State ───────────────────────────────────────────────────────────────────
+            let currentMode = "current";
+            let formGames = 3;
+            let isFirstBuild = true;
+            const toast = document.getElementById("toast");
+            const backdrop = document.getElementById("backdrop");
+
+            // ─── Team data (loaded from data.json) ───────────────────────────────────────
+            let TEAMS = [];
+
+            const badgeUrl = (team) => team.image ?? (team.code ? `https://resources.premierleague.com/premierleague/badges/70/t${team.code}.png` : null);
+
+            function initials(name) {
+                const w = name.split(" ");
+                return w.length === 1
+                    ? name.slice(0, 2).toUpperCase()
+                    : w
+                          .slice(0, 2)
+                          .map((x) => x[0])
+                          .join("")
+                          .toUpperCase();
+            }
+
+            function ordinal(n) {
+                const s = ["th", "st", "nd", "rd"],
+                    v = n % 100;
+                return n + (s[(v - 20) % 10] || s[v] || s[0]);
+            }
+
+            // ─── Form projection ─────────────────────────────────────────────────────────
+            function resultPts(r) {
+                return r === "W" ? 3 : r === "D" ? 1 : 0;
+            }
+
+            function calcProjectedPts(team, n) {
+                const recent = team.form.slice(-n);
+                const ppg = recent.reduce((s, r) => s + resultPts(r), 0) / n;
+                const gamesRemaining = (TEAMS.length - 1) * 2 - team.played;
+                return Math.round(team.pts + ppg * gamesRemaining);
+            }
+
+            // ─── Build ladder ─────────────────────────────────────────────────────────────
+            function buildLadder() {
+                closeToast();
+
+                // Compute display pts for each team
+                const teamData = TEAMS.map((t) => ({
+                    ...t,
+                    displayPts: currentMode === "current" ? t.pts : calcProjectedPts(t, formGames),
+                }));
+
+                // Assign display positions (sorted by displayPts desc, ties broken by current pos)
+                const sorted = [...teamData].sort((a, b) => b.displayPts - a.displayPts || a.pos - b.pos);
+                sorted.forEach((t, i) => {
+                    t.displayPos = i + 1;
+                });
+
+                const maxDisplayPts = Math.max(...teamData.map((t) => t.displayPts));
+                const relThreshold = teamData.length - 2; // bottom 3 are always relegated
+
+                // Group by display pts
+                const byPts = {};
+                teamData.forEach((t) => {
+                    (byPts[t.displayPts] = byPts[t.displayPts] || []).push(t);
+                });
+
+                // Clear previous rungs and zone bands
+                const container = document.getElementById("rungs");
+                container.innerHTML = "";
+                document.querySelectorAll("#ladder .zone-ucl, #ladder .zone-rel").forEach((el) => el.remove());
+
+                // Update hint text
+                document.querySelector(".hint").textContent =
+                    currentMode === "current"
+                        ? `Points 0 – ${maxDisplayPts} · Tap a team for stats`
+                        : `Projected final pts · Last ${formGames} game${formGames > 1 ? "s" : ""} of form · Tap a team for stats`;
+
+                const rungEls = {};
+
+                for (let p = maxDisplayPts; p >= 0; p--) {
+                    const teams = byPts[p];
+                    const rung = document.createElement("div");
+                    rung.className = "rung" + (teams ? " occ" : "");
+                    rung.dataset.pts = p;
+
+                    const lbl = document.createElement("div");
+                    lbl.className = "rung-lbl";
+                    if (teams || p % 10 === 0 || p === 0) lbl.textContent = p;
+                    rung.appendChild(lbl);
+
+                    const bar = document.createElement("div");
+                    bar.className = "rung-bar";
+
+                    if (teams) {
+                        teams.forEach((team) => {
+                            const tok = document.createElement("div");
+                            tok.className = "token";
+                            tok.setAttribute("role", "button");
+                            tok.setAttribute("tabindex", "0");
+                            tok.setAttribute("aria-label", `${team.name}: ${team.displayPts} points`);
+                            tok.addEventListener("click", () => openToast(team));
+                            tok.addEventListener("keydown", (e) => e.key === "Enter" && openToast(team));
+
+                            const ring = document.createElement("div");
+                            ring.className = "badge-ring";
+                            ring.style.borderColor = team.color;
+
+                            if (team.displayPos === 1) {
+                                ring.style.boxShadow = `0 0 18px 4px rgba(74,222,128,0.85), 0 0 6px rgba(74,222,128,0.5), 0 2px 10px rgba(0,0,0,0.6)`;
+                                ring.style.borderColor = `#4ade80`;
+                            } else if (team.displayPos >= relThreshold) {
+                                ring.style.boxShadow = `0 0 18px 4px rgba(248,113,113,0.85), 0 0 6px rgba(248,113,113,0.5), 0 2px 10px rgba(0,0,0,0.6)`;
+                                ring.style.borderColor = `#f87171`;
+                            } else {
+                                ring.style.boxShadow = `0 0 14px ${team.color}80, 0 2px 10px rgba(0,0,0,0.6)`;
+                            }
+
+                            const img = document.createElement("img");
+                            img.className = "badge-img";
+                            img.alt = team.name;
+                            img.loading = "lazy";
+
+                            const fallback = document.createElement("div");
+                            fallback.className = "badge-fallback";
+                            fallback.style.background = team.color;
+                            fallback.textContent = initials(team.name);
+
+                            const url = badgeUrl(team);
+                            if (url) {
+                                img.src = url;
+                                img.onerror = function () {
+                                    this.style.display = "none";
+                                    fallback.style.display = "flex";
+                                };
+                            } else {
+                                img.style.display = "none";
+                                fallback.style.display = "flex";
+                            }
+
+                            ring.appendChild(img);
+                            ring.appendChild(fallback);
+
+                            const nameTag = document.createElement("div");
+                            nameTag.className = "token-name";
+                            nameTag.textContent = team.short;
+
+                            const posTag = document.createElement("div");
+                            posTag.className = "token-pos";
+                            posTag.textContent = team.displayPos;
+
+                            if (team.displayPos === 1) {
+                                const statusTag = document.createElement("div");
+                                statusTag.className = "token-status champion";
+                                statusTag.textContent = "★";
+                                tok.appendChild(statusTag);
+                            } else if (team.displayPos >= relThreshold) {
+                                const statusTag = document.createElement("div");
+                                statusTag.className = "token-status relegated";
+                                statusTag.textContent = "↓";
+                                tok.appendChild(statusTag);
+                            }
+
+                            tok.appendChild(ring);
+                            tok.appendChild(nameTag);
+                            tok.appendChild(posTag);
+                            bar.appendChild(tok);
+                        });
+                    }
+
+                    rung.appendChild(bar);
+                    container.appendChild(rung);
+                    rungEls[p] = rung;
+                }
+
+                // ─── Safety / wisdom lines (current mode only) ────────────────────────────
+                if (currentMode === "current") {
+                    const team18 = teamData.find((t) => t.pos === relThreshold);
+                    const seasonGames = (teamData.length - 1) * 2;
+                    const gamesLeft18 = seasonGames - team18.played;
+                    const safeRung = team18.pts + gamesLeft18 * 3 + 1;
+                    if (safeRung <= maxDisplayPts && rungEls[safeRung]) {
+                        const el = rungEls[safeRung];
+                        el.classList.add("safe-line");
+                        el.querySelector(".rung-lbl").textContent = safeRung;
+                        const tag = document.createElement("div");
+                        tag.className = "safe-tag";
+                        tag.textContent = "Safety line";
+                        tag.style.cursor = "pointer";
+                        tag.addEventListener("click", () =>
+                            openLineToast({
+                                color: "#10b981",
+                                icon: "▲",
+                                name: "Safety Line",
+                                sub: `One point more than the max ${team18.name} can reach`,
+                                rung: safeRung,
+                                stats: [
+                                    { v: team18.pts, k: "Current pts" },
+                                    { v: gamesLeft18, k: "Games left" },
+                                    { v: gamesLeft18 + " × 3", k: "Max pts left" },
+                                    { v: team18.pts + " + " + gamesLeft18 * 3 + " + 1", k: "= " + safeRung },
+                                ],
+                            }),
+                        );
+                        el.querySelector(".rung-bar").appendChild(tag);
+                    }
+
+                    const ppg18 = team18.pts / team18.played;
+                    const safeFormRung = team18.pts + Math.ceil(ppg18 * gamesLeft18) + 1;
+                    function attachFormTag(bar, onLeft) {
+                        const tag = document.createElement("div");
+                        tag.className = "safe-form-tag";
+                        if (onLeft) {
+                            tag.style.right = "auto";
+                            tag.style.left = "calc(var(--rail-w) + 6px)";
+                        }
+                        tag.textContent = "Safety by form";
+                        tag.style.cursor = "pointer";
+                        tag.addEventListener("click", () =>
+                            openLineToast({
+                                color: "#22d3ee",
+                                icon: "≈",
+                                name: "Safety by Form",
+                                sub: `Projected pts for ${team18.name} (${ordinal(relThreshold)}) at season form`,
+                                rung: safeFormRung,
+                                stats: [
+                                    { v: team18.pts, k: "Current pts" },
+                                    { v: ppg18.toFixed(2), k: "Pts per game" },
+                                    { v: gamesLeft18, k: "Games left" },
+                                    { v: "round-up(" + ppg18.toFixed(2) + " × " + gamesLeft18 + ") + 1", k: "Formula" },
+                                ],
+                            }),
+                        );
+                        bar.appendChild(tag);
+                    }
+                    if (safeFormRung <= maxDisplayPts && safeFormRung !== safeRung && rungEls[safeFormRung]) {
+                        const el = rungEls[safeFormRung];
+                        el.classList.add("safe-form-line");
+                        el.querySelector(".rung-lbl").textContent = safeFormRung;
+                        attachFormTag(el.querySelector(".rung-bar"), false);
+                    } else if (safeFormRung <= maxDisplayPts && safeFormRung === safeRung && rungEls[safeFormRung]) {
+                        attachFormTag(rungEls[safeFormRung].querySelector(".rung-bar"), true);
+                    }
+
+                    if (rungEls[40]) {
+                        const el = rungEls[40];
+                        el.classList.add("wisdom-line");
+                        el.querySelector(".rung-lbl").textContent = 40;
+                        const tag = document.createElement("div");
+                        tag.className = "wisdom-tag";
+                        tag.textContent = "40-pt rule";
+                        tag.style.cursor = "pointer";
+                        tag.addEventListener("click", () =>
+                            openLineToast({
+                                color: "#f59e0b",
+                                icon: "★",
+                                name: "40-Point Rule",
+                                sub: "Accepted wisdom: historically safe total",
+                                rung: 40,
+                                stats: [
+                                    { v: "40", k: "Magic number" },
+                                    { v: "Tradition", k: "Basis" },
+                                    { v: "No formula", k: "Method" },
+                                    { v: "Experience", k: "Source" },
+                                ],
+                            }),
+                        );
+                        el.querySelector(".rung-bar").appendChild(tag);
+                    }
+                }
+
+                // ─── Zone bands ───────────────────────────────────────────────────────────
+                const uclTeams = teamData.filter((t) => t.displayPos <= 4);
+                const relTeams = teamData.filter((t) => t.displayPos >= 18);
+                const uclMin = Math.min(...uclTeams.map((t) => t.displayPts));
+                const uclMax = Math.max(...uclTeams.map((t) => t.displayPts));
+                const relMin = Math.min(...relTeams.map((t) => t.displayPts));
+                const relMax = Math.max(...relTeams.map((t) => t.displayPts));
+
+                function addZone(className, topPts, botPts) {
+                    const topEl = rungEls[topPts];
+                    const botEl = rungEls[botPts];
+                    if (!topEl || !botEl) return;
+                    const topY = topEl.offsetTop;
+                    const botY = botEl.offsetTop + botEl.offsetHeight;
+                    const band = document.createElement("div");
+                    band.className = className;
+                    band.style.top = topY + "px";
+                    band.style.height = botY - topY + "px";
+                    document.getElementById("ladder").appendChild(band);
+                }
+
+                const doScroll = isFirstBuild;
+                isFirstBuild = false;
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        addZone("zone-ucl", uclMax, uclMin);
+                        addZone("zone-rel", relMax, relMin);
+                        if (doScroll) {
+                            const topEl = rungEls[maxDisplayPts];
+                            if (topEl) {
+                                const y = topEl.getBoundingClientRect().top + window.scrollY - 80;
+                                window.scrollTo({ top: Math.max(0, y), behavior: "instant" });
+                            }
+                        }
+                    });
+                });
+            }
+
+            // ─── Mode switching ───────────────────────────────────────────────────────────
+            document.querySelectorAll(".mode-tab").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".mode-tab").forEach((b) => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    currentMode = btn.dataset.mode;
+                    document.getElementById("formControls").classList.toggle("visible", currentMode === "final");
+                    buildLadder();
+                });
+            });
+
+            document.getElementById("formSelect").addEventListener("change", (e) => {
+                formGames = parseInt(e.target.value);
+                buildLadder();
+            });
+
+            // ─── Initial build (fetch data + comps then render) ───────────────────────────
+            let allData = {};
+            let allComps = [];
+
+            function switchLeague(leagueId) {
+                const league = allData[leagueId] ?? Object.values(allData)[0];
+                TEAMS = league.teams;
+
+                // Update emblem
+                const comp = allComps.find((c) => c.code === leagueId);
+                const emblemEl = document.getElementById("leagueEmblem");
+                emblemEl.src = comp?.emblem ?? "";
+                emblemEl.alt = comp?.name ?? leagueId;
+
+                // Update subtitle
+                const season = league.season ? `${league.season}/${String(parseInt(league.season) + 1).slice(2)}` : "";
+                const md = league.matchday ? `Matchday ${league.matchday}` : "";
+                document.getElementById("headerSub").textContent =
+                    ["Points Ladder", season, md].filter(Boolean).join(" · ");
+
+                // Sync select value
+                document.getElementById("leagueSelect").value = leagueId;
+
+                // Update URL without reload
+                const url = new URL(window.location);
+                url.searchParams.set("leagueid", leagueId);
+                history.replaceState(null, "", url);
+
+                buildLadder();
+            }
+
+            Promise.all([fetch("data.json").then((r) => r.json()), fetch("comps.json").then((r) => r.json())])
+                .then(([data, comps]) => {
+                    allData = Array.isArray(data) ? { PL: { teams: data } } : data;
+                    allComps = comps.competitions ?? [];
+
+                    // Populate select with only leagues present in data.json
+                    const select = document.getElementById("leagueSelect");
+                    const availableKeys = Object.keys(allData);
+                    const matchedComps = allComps.filter((c) => availableKeys.includes(c.code));
+                    // Include any data keys with no comp entry as fallbacks
+                    const unmatchedKeys = availableKeys.filter((k) => !matchedComps.some((c) => c.code === k));
+
+                    matchedComps.forEach((c) => {
+                        const opt = document.createElement("option");
+                        opt.value = c.code;
+                        opt.textContent = c.name;
+                        select.appendChild(opt);
+                    });
+                    unmatchedKeys.forEach((k) => {
+                        const opt = document.createElement("option");
+                        opt.value = k;
+                        opt.textContent = allData[k].name ?? k;
+                        select.appendChild(opt);
+                    });
+
+                    select.addEventListener("change", (e) => switchLeague(e.target.value));
+
+                    const leagueId = new URLSearchParams(window.location.search).get("leagueid")
+                        ?? (availableKeys.includes("PL") ? "PL" : availableKeys[0]);
+                    switchLeague(leagueId);
+                })
+                .catch((err) => {
+                    document.querySelector(".hint").textContent = "Failed to load data — " + err.message;
+                });
+
+            // ─── Toast ───────────────────────────────────────────────────────────────────
+            function openToast(team) {
+                const img = document.getElementById("tImg");
+                const tUrl = badgeUrl(team);
+                img.src = tUrl ?? "";
+                img.style.display = tUrl ? "" : "none";
+                img.alt = team.name;
+
+                const ring = document.getElementById("tRing");
+                ring.style.borderColor = team.color;
+                ring.style.boxShadow = `0 0 16px ${team.color}66`;
+
+                const isFinal = currentMode === "final";
+                const gamesLeft = (TEAMS.length - 1) * 2 - team.played;
+
+                document.getElementById("tName").textContent = team.name;
+                document.getElementById("tSub").textContent = isFinal
+                    ? `Projected ${ordinal(team.displayPos)} · ${gamesLeft} game${gamesLeft !== 1 ? "s" : ""} to play`
+                    : `${ordinal(team.pos)} place · Matchday ${team.played}`;
+                document.getElementById("tPts").textContent = team.displayPts;
+                document.getElementById("tPlayed").textContent = isFinal ? gamesLeft : team.played;
+                document.getElementById("tPlayedLbl").textContent = isFinal ? "to play" : "played";
+
+                const gdStr = (team.gd >= 0 ? "+" : "") + team.gd;
+                const recentForm = team.form.slice(-formGames).join(" ");
+                const stats = isFinal
+                    ? [
+                          { v: team.pts, k: "Current pts", cls: "" },
+                          { v: team.displayPts, k: "Projected", cls: "" },
+                          { v: recentForm, k: `Last ${formGames}`, cls: "" },
+                          { v: team.won, k: "Won", cls: "" },
+                          { v: team.drawn, k: "Drawn", cls: "" },
+                          { v: gdStr, k: "GD", cls: team.gd > 0 ? "pos" : team.gd < 0 ? "neg" : "" },
+                      ]
+                    : [
+                          { v: team.won, k: "Won", cls: "" },
+                          { v: team.drawn, k: "Drawn", cls: "" },
+                          { v: team.lost, k: "Lost", cls: "" },
+                          { v: team.gf, k: "For", cls: "" },
+                          { v: team.ga, k: "Against", cls: "" },
+                          { v: gdStr, k: "GD", cls: team.gd > 0 ? "pos" : team.gd < 0 ? "neg" : "" },
+                      ];
+
+                document.getElementById("statsGrid").innerHTML = stats.map((s) => `<div class="stat"><div class="stat-v ${s.cls}">${s.v}</div><div class="stat-k">${s.k}</div></div>`).join("");
+
+                toast.classList.add("open");
+                backdrop.classList.add("on");
+            }
+
+            function openLineToast({ color, icon, name, sub, rung, stats }) {
+                const img = document.getElementById("tImg");
+                img.src = "";
+                img.style.display = "none";
+
+                const iconEl = document.getElementById("tIcon");
+                iconEl.textContent = icon;
+                iconEl.style.display = "block";
+                iconEl.style.color = color;
+
+                const ring = document.getElementById("tRing");
+                ring.style.background = "transparent";
+                ring.style.borderColor = color;
+                ring.style.boxShadow = `0 0 16px ${color}66`;
+
+                document.getElementById("tName").textContent = name;
+                document.getElementById("tName").style.color = color;
+                document.getElementById("tSub").textContent = sub;
+                document.getElementById("tPts").textContent = rung;
+                document.getElementById("tPts").style.color = color;
+                document.getElementById("tPlayed").textContent = "pts";
+                document.getElementById("tPlayed").style.fontSize = "14px";
+                document.getElementById("tPlayed").style.color = "rgba(255,255,255,0.5)";
+                document.getElementById("tPlayedLbl").textContent = "";
+
+                document.getElementById("statsGrid").innerHTML = stats.map((s) => `<div class="stat"><div class="stat-v">${s.v}</div><div class="stat-k">${s.k}</div></div>`).join("");
+
+                toast.classList.add("open");
+                backdrop.classList.add("on");
+            }
+
+            function closeToast() {
+                toast.classList.remove("open");
+                backdrop.classList.remove("on");
+                const img = document.getElementById("tImg");
+                img.style.display = "";
+                const iconEl = document.getElementById("tIcon");
+                iconEl.style.display = "none";
+                const ring = document.getElementById("tRing");
+                ring.style.background = "#fff";
+                document.getElementById("tName").style.color = "";
+                document.getElementById("tPts").style.color = "";
+                document.getElementById("tPlayed").style.fontSize = "";
+                document.getElementById("tPlayed").style.color = "";
+                document.getElementById("tPlayedLbl").textContent = currentMode === "final" ? "to play" : "played";
+            }
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") closeToast();
+            });
+        </script>
+    </body>
+</html>
