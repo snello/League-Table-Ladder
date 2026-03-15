@@ -611,6 +611,186 @@
                 margin-top: 3px;
             }
 
+            /* ── Recent form dots (current mode toast, inside t-info) ── */
+            .t-form-dots {
+                display: flex;
+                gap: 4px;
+                margin-top: 6px;
+            }
+            .t-form-dot {
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 9px;
+                font-weight: 700;
+                color: #000;
+            }
+            .t-form-dot.W { background: #4ade80; }
+            .t-form-dot.D { background: #fbbf24; }
+            .t-form-dot.L { background: #f87171; }
+            .t-form-dot.empty {
+                background: rgba(255, 255, 255, 0.1);
+                color: rgba(255, 255, 255, 0.2);
+            }
+
+            /* ── Fixtures strip ── */
+            .fixtures-section {
+                margin-top: 14px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-top: 12px;
+            }
+            .fixtures-label {
+                font-size: 10px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: rgba(255, 255, 255, 0.35);
+                margin-bottom: 8px;
+            }
+            .fixtures-strip {
+                display: flex;
+                gap: 8px;
+                overflow-x: auto;
+                padding-bottom: 6px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .fixtures-strip::-webkit-scrollbar { display: none; }
+            .fixture-card {
+                flex-shrink: 0;
+                width: 62px;
+                background: rgba(255, 255, 255, 0.06);
+                border-radius: 10px;
+                padding: 7px 5px;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                transition: background 0.15s, border-color 0.15s;
+            }
+            .fixture-card:hover { background: rgba(255, 255, 255, 0.11); }
+            .fixture-card.has-result { border-color: rgba(212, 175, 55, 0.35); }
+            .fixture-date {
+                font-size: 9px;
+                color: rgba(255, 255, 255, 0.38);
+                letter-spacing: 0.2px;
+            }
+            .fixture-badge {
+                width: 28px;
+                height: 28px;
+                object-fit: contain;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.9);
+                flex-shrink: 0;
+            }
+            .fixture-opp {
+                font-size: 9px;
+                font-weight: 700;
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 56px;
+                line-height: 1.2;
+            }
+            .fixture-venue {
+                font-size: 8px;
+                color: rgba(255, 255, 255, 0.3);
+                letter-spacing: 0.3px;
+            }
+            .fixture-result-pill {
+                font-size: 10px;
+                font-weight: 800;
+                width: 22px;
+                height: 16px;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .fixture-result-pill.w { background: rgba(74,222,128,0.2); color: #4ade80; }
+            .fixture-result-pill.d { background: rgba(251,191,36,0.2); color: #fbbf24; }
+            .fixture-result-pill.l { background: rgba(248,113,113,0.2); color: #f87171; }
+
+            /* ── Result picker ── */
+            .result-picker-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 70;
+                background: rgba(0, 0, 0, 0.55);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s;
+            }
+            .result-picker-overlay.open {
+                opacity: 1;
+                pointer-events: all;
+            }
+            .result-picker-card {
+                background: #1b0030;
+                border: 1px solid rgba(212, 175, 55, 0.4);
+                border-radius: 18px;
+                padding: 20px 20px 16px;
+                width: 240px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7);
+            }
+            .result-picker-head {
+                font-size: 10px;
+                color: rgba(255, 255, 255, 0.4);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .result-picker-opp {
+                font-size: 16px;
+                font-weight: 800;
+                text-align: center;
+            }
+            .result-picker-btns {
+                display: flex;
+                gap: 10px;
+                margin-top: 4px;
+            }
+            .result-btn {
+                width: 62px;
+                height: 50px;
+                border-radius: 10px;
+                border: 2px solid transparent;
+                font-family: 'Inter', sans-serif;
+                font-size: 18px;
+                font-weight: 800;
+                cursor: pointer;
+                transition: transform 0.1s, box-shadow 0.15s;
+            }
+            .result-btn:active { transform: scale(0.92); }
+            .result-btn.w { background: rgba(74,222,128,0.12); color: #4ade80; border-color: rgba(74,222,128,0.25); }
+            .result-btn.d { background: rgba(251,191,36,0.12); color: #fbbf24; border-color: rgba(251,191,36,0.25); }
+            .result-btn.l { background: rgba(248,113,113,0.12); color: #f87171; border-color: rgba(248,113,113,0.25); }
+            .result-btn.selected.w { border-color: #4ade80; box-shadow: 0 0 14px rgba(74,222,128,0.5); }
+            .result-btn.selected.d { border-color: #fbbf24; box-shadow: 0 0 14px rgba(251,191,36,0.5); }
+            .result-btn.selected.l { border-color: #f87171; box-shadow: 0 0 14px rgba(248,113,113,0.5); }
+            .result-picker-clear {
+                background: none;
+                border: none;
+                color: rgba(255, 255, 255, 0.3);
+                font-family: 'Inter', sans-serif;
+                font-size: 11px;
+                cursor: pointer;
+                padding: 2px 8px;
+                text-decoration: underline;
+            }
+            .result-picker-clear:hover { color: rgba(255, 255, 255, 0.6); }
+
             /* ── Desktop ── */
             @media (min-width: 580px) {
                 :root {
@@ -693,7 +873,8 @@
                 flex-wrap: wrap;
                 gap: 8px;
                 padding: 8px 14px 10px;
-                max-width: 580px;
+                width: calc(100% - 28px);
+                max-width: calc(580px - 28px);
                 margin: 0 auto;
                 background: rgba(212, 175, 55, 0.07);
                 border: 1px solid rgba(212, 175, 55, 0.25);
@@ -771,6 +952,7 @@
                 <div class="t-info">
                     <div class="t-name" id="tName">—</div>
                     <div class="t-sub" id="tSub">—</div>
+                    <div class="t-form-dots" id="tFormDots" style="display:none"></div>
                 </div>
                 <div style="text-align: center; margin-right: 6px">
                     <div class="t-pts" id="tPts">—</div>
@@ -783,6 +965,23 @@
                 <button class="t-close" onclick="closeToast()" aria-label="Close">✕</button>
             </div>
             <div class="stats-grid" id="statsGrid"></div>
+            <div class="fixtures-section" id="fixturesSection" style="display:none">
+                <div class="fixtures-label">Remaining Fixtures</div>
+                <div class="fixtures-strip" id="fixturesStrip"></div>
+            </div>
+        </div>
+
+        <div class="result-picker-overlay" id="resultPickerOverlay">
+            <div class="result-picker-card" id="resultPickerCard">
+                <div class="result-picker-head">Set result</div>
+                <div class="result-picker-opp" id="pickerOpp">—</div>
+                <div class="result-picker-btns">
+                    <button class="result-btn w" id="pickerW">W</button>
+                    <button class="result-btn d" id="pickerD">D</button>
+                    <button class="result-btn l" id="pickerL">L</button>
+                </div>
+                <button class="result-picker-clear" id="pickerClear" style="display:none">Clear result</button>
+            </div>
         </div>
 
         <script>
@@ -795,6 +994,28 @@
 
             // ─── Team data (loaded from data.json) ───────────────────────────────────────
             let TEAMS = [];
+            let currentLeagueId = "PL";
+            let teamFixtures = {};      // { [teamId]: [...matchObjects] }
+            let fixturesLeagueId = null;
+            let pickerMatchId = null;
+            let pickerTeamId = null;
+            let pickerIsHome = false;
+
+            // ─── Fixture result storage ───────────────────────────────────────────────────
+            function resultsKey() { return `ladder_${currentLeagueId}_results`; }
+            function getResults() { return JSON.parse(localStorage.getItem(resultsKey()) ?? "{}"); }
+            function setResult(matchId, val) {
+                const r = getResults();
+                if (val === null) delete r[String(matchId)];
+                else r[String(matchId)] = val;
+                localStorage.setItem(resultsKey(), JSON.stringify(r));
+            }
+            // Translate stored HOME_WIN/DRAW/AWAY_WIN to W/D/L from a specific team's perspective
+            function teamResult(stored, isHome) {
+                if (stored === "DRAW") return "D";
+                if (isHome) return stored === "HOME_WIN" ? "W" : "L";
+                return stored === "AWAY_WIN" ? "W" : "L";
+            }
 
             const badgeUrl = (team) => team.image ?? (team.code ? `https://resources.premierleague.com/premierleague/badges/70/t${team.code}.png` : null);
 
@@ -823,13 +1044,30 @@
             function calcProjectedPts(team, n) {
                 const recent = team.form.slice(-n);
                 const ppg = recent.reduce((s, r) => s + resultPts(r), 0) / n;
-                const gamesRemaining = (TEAMS.length - 1) * 2 - team.played;
-                return Math.round(team.pts + ppg * gamesRemaining);
+
+                const fixtures = teamFixtures[team.id];
+                if (!fixtures) {
+                    const gamesRemaining = (TEAMS.length - 1) * 2 - team.played;
+                    return Math.round(team.pts + ppg * gamesRemaining);
+                }
+
+                // Use fixture data + user-set results
+                const results = getResults();
+                let userPts = 0, userCount = 0;
+                for (const match of fixtures) {
+                    const stored = results[String(match.id)];
+                    if (!stored) continue;
+                    userCount++;
+                    const isHome = match.homeTeam.id === team.id;
+                    userPts += resultPts(teamResult(stored, isHome));
+                }
+                const unset = fixtures.length - userCount;
+                return Math.round(team.pts + userPts + ppg * unset);
             }
 
             // ─── Build ladder ─────────────────────────────────────────────────────────────
-            function buildLadder() {
-                closeToast();
+            function buildLadder(keepToast = false) {
+                if (!keepToast) closeToast();
 
                 // Compute display pts for each team
                 const teamData = TEAMS.map((t) => ({
@@ -1097,11 +1335,12 @@
 
             // ─── Mode switching ───────────────────────────────────────────────────────────
             document.querySelectorAll(".mode-tab").forEach((btn) => {
-                btn.addEventListener("click", () => {
+                btn.addEventListener("click", async () => {
                     document.querySelectorAll(".mode-tab").forEach((b) => b.classList.remove("active"));
                     btn.classList.add("active");
                     currentMode = btn.dataset.mode;
                     document.getElementById("formControls").classList.toggle("visible", currentMode === "final");
+                    if (currentMode === "final") await loadFixtures(currentLeagueId);
                     buildLadder();
                 });
             });
@@ -1115,7 +1354,21 @@
             let allData = {};
             let allComps = [];
 
+            async function loadFixtures(leagueId) {
+                if (fixturesLeagueId === leagueId) return;
+                teamFixtures = {};
+                await Promise.all(TEAMS.map(async (team) => {
+                    try {
+                        const r = await fetch(`fixtures/${leagueId}/${team.id}.json`);
+                        if (r.ok) teamFixtures[team.id] = await r.json();
+                    } catch { /* fixture file may not exist yet */ }
+                }));
+                fixturesLeagueId = leagueId;
+            }
+
             function switchLeague(leagueId) {
+                currentLeagueId = leagueId;
+                fixturesLeagueId = null; // invalidate fixture cache on league change
                 const league = allData[leagueId] ?? Object.values(allData)[0];
                 TEAMS = league.teams;
 
@@ -1139,7 +1392,11 @@
                 url.searchParams.set("leagueid", leagueId);
                 history.replaceState(null, "", url);
 
-                buildLadder();
+                if (currentMode === "final") {
+                    loadFixtures(leagueId).then(() => buildLadder());
+                } else {
+                    buildLadder();
+                }
             }
 
             Promise.all([fetch("data.json").then((r) => r.json()), fetch("comps.json").then((r) => r.json())])
@@ -1222,8 +1479,120 @@
 
                 document.getElementById("statsGrid").innerHTML = stats.map((s) => `<div class="stat"><div class="stat-v ${s.cls}">${s.v}</div><div class="stat-k">${s.k}</div></div>`).join("");
 
+                // Show form dots in Current mode
+                const dots = document.getElementById("tFormDots");
+                if (!isFinal) {
+                    const last5 = team.form.slice(-5);
+                    dots.innerHTML = Array.from({ length: 5 }, (_, i) => {
+                        const r = last5[i] ?? null;
+                        return r
+                            ? `<div class="t-form-dot ${r}">${r}</div>`
+                            : `<div class="t-form-dot empty">·</div>`;
+                    }).join("");
+                    dots.style.display = "";
+                } else {
+                    dots.style.display = "none";
+                }
+
+                // Show fixture strip in Final mode
+                if (isFinal) {
+                    renderFixtureStrip(team);
+                } else {
+                    document.getElementById("fixturesSection").style.display = "none";
+                }
+
                 toast.classList.add("open");
                 backdrop.classList.add("on");
+            }
+
+            function renderFixtureStrip(team) {
+                const fixtures = teamFixtures[team.id];
+                const section = document.getElementById("fixturesSection");
+                const strip = document.getElementById("fixturesStrip");
+
+                if (!fixtures || fixtures.length === 0) {
+                    section.style.display = "none";
+                    return;
+                }
+
+                const results = getResults();
+                section.style.display = "";
+                strip.innerHTML = "";
+
+                fixtures.forEach((match) => {
+                    const isHome = match.homeTeam.id === team.id;
+                    const opp = isHome ? match.awayTeam : match.homeTeam;
+                    const oppTeam = TEAMS.find((t) => t.id === opp.id);
+                    const date = new Date(match.utcDate);
+                    const dateStr = date.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+                    const stored = results[String(match.id)];
+                    const resultCode = stored ? teamResult(stored, isHome) : null;
+
+                    const card = document.createElement("div");
+                    card.className = "fixture-card" + (stored ? " has-result" : "");
+
+                    const badgeSrc = oppTeam ? (badgeUrl(oppTeam) ?? "") : (opp.crest ?? "");
+                    const pillHtml = resultCode
+                        ? `<div class="fixture-result-pill ${resultCode.toLowerCase()}">${resultCode}</div>`
+                        : `<div style="height:16px"></div>`;
+
+                    card.innerHTML = `
+                        <div class="fixture-date">${dateStr}</div>
+                        <img class="fixture-badge" src="${badgeSrc}" alt="${opp.name}" onerror="this.style.display='none'" />
+                        <div class="fixture-opp">${oppTeam?.short ?? opp.shortName ?? opp.name}</div>
+                        <div class="fixture-venue">${isHome ? "HOME" : "AWAY"}</div>
+                        ${pillHtml}
+                    `;
+                    card.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        openResultPicker(match, team.id, isHome);
+                    });
+                    strip.appendChild(card);
+                });
+            }
+
+            function openResultPicker(match, teamId, isHome) {
+                pickerMatchId = match.id;
+                pickerTeamId = teamId;
+                pickerIsHome = isHome;
+
+                const opp = isHome ? match.awayTeam : match.homeTeam;
+                const oppTeam = TEAMS.find((t) => t.id === opp.id);
+                document.getElementById("pickerOpp").textContent = `vs ${oppTeam?.short ?? opp.name}`;
+
+                const stored = getResults()[String(match.id)];
+                const current = stored ? teamResult(stored, isHome) : null;
+                document.getElementById("pickerW").classList.toggle("selected", current === "W");
+                document.getElementById("pickerD").classList.toggle("selected", current === "D");
+                document.getElementById("pickerL").classList.toggle("selected", current === "L");
+                document.getElementById("pickerClear").style.display = stored ? "" : "none";
+
+                document.getElementById("resultPickerOverlay").classList.add("open");
+            }
+
+            function closeResultPicker() {
+                document.getElementById("resultPickerOverlay").classList.remove("open");
+                pickerMatchId = null;
+            }
+
+            function pickResult(result) {
+                if (pickerMatchId === null) return;
+
+                let stored = null;
+                if (result === "W") stored = pickerIsHome ? "HOME_WIN" : "AWAY_WIN";
+                else if (result === "D") stored = "DRAW";
+                else if (result === "L") stored = pickerIsHome ? "AWAY_WIN" : "HOME_WIN";
+
+                setResult(pickerMatchId, stored);
+                closeResultPicker();
+
+                // Rebuild ladder without closing the toast, then refresh toast pts + fixture strip
+                buildLadder(true);
+                const team = TEAMS.find((t) => t.id === pickerTeamId);
+                if (team) {
+                    document.getElementById("tPts").textContent = calcProjectedPts(team, formGames);
+                    renderFixtureStrip(team);
+                }
             }
 
             function openLineToast({ color, icon, name, sub, rung, stats }) {
@@ -1258,6 +1627,7 @@
             }
 
             function closeToast() {
+                closeResultPicker();
                 toast.classList.remove("open");
                 backdrop.classList.remove("on");
                 const img = document.getElementById("tImg");
@@ -1273,8 +1643,23 @@
                 document.getElementById("tPlayedLbl").textContent = currentMode === "final" ? "to play" : "played";
             }
 
+            // ─── Result picker wiring ─────────────────────────────────────────────────────
+            document.getElementById("pickerW").addEventListener("click", () => pickResult("W"));
+            document.getElementById("pickerD").addEventListener("click", () => pickResult("D"));
+            document.getElementById("pickerL").addEventListener("click", () => pickResult("L"));
+            document.getElementById("pickerClear").addEventListener("click", () => pickResult(null));
+            document.getElementById("resultPickerOverlay").addEventListener("click", (e) => {
+                if (e.target === document.getElementById("resultPickerOverlay")) closeResultPicker();
+            });
+
             document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape") closeToast();
+                if (e.key === "Escape") {
+                    if (document.getElementById("resultPickerOverlay").classList.contains("open")) {
+                        closeResultPicker();
+                    } else {
+                        closeToast();
+                    }
+                }
             });
         </script>
     </body>
