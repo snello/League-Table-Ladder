@@ -59,23 +59,23 @@
         "pos": 3,
         "name": "Manchester United",
         "short": "Man Utd",
-        "played": 29,
-        "won": 14,
+        "played": 30,
+        "won": 15,
         "drawn": 9,
         "lost": 6,
-        "gf": 51,
-        "ga": 40,
-        "gd": 11,
-        "pts": 51,
+        "gf": 54,
+        "ga": 41,
+        "gd": 13,
+        "pts": 54,
         "code": 1,
         "color": "#DA291C",
         "crest": "https://crests.football-data.org/66.png",
         "form": [
+          "W",
           "L",
           "W",
           "W",
-          "D",
-          "W"
+          "D"
         ],
         "image": "images/PL/66.png"
       },
@@ -84,13 +84,13 @@
         "pos": 4,
         "name": "Aston Villa",
         "short": "Aston Villa",
-        "played": 29,
+        "played": 30,
         "won": 15,
         "drawn": 6,
-        "lost": 8,
-        "gf": 39,
-        "ga": 34,
-        "gd": 5,
+        "lost": 9,
+        "gf": 40,
+        "ga": 37,
+        "gd": 3,
         "pts": 51,
         "code": 7,
         "color": "#670E36",
@@ -98,9 +98,9 @@
         "form": [
           "L",
           "L",
+          "L",
           "D",
-          "W",
-          "D"
+          "W"
         ],
         "image": "images/PL/58.png"
       },
@@ -255,8 +255,33 @@
         "image": "images/PL/1044.png"
       },
       {
-        "id": 397,
+        "id": 63,
         "pos": 11,
+        "name": "Fulham",
+        "short": "Fulham",
+        "played": 30,
+        "won": 12,
+        "drawn": 5,
+        "lost": 13,
+        "gf": 40,
+        "ga": 43,
+        "gd": -3,
+        "pts": 41,
+        "code": 54,
+        "color": "#B0B0B0",
+        "crest": "https://crests.football-data.org/63.png",
+        "form": [
+          "D",
+          "L",
+          "W",
+          "W",
+          "L"
+        ],
+        "image": "images/PL/63.png"
+      },
+      {
+        "id": 397,
+        "pos": 12,
         "name": "Brighton & Hove Albion",
         "short": "Brighton",
         "played": 30,
@@ -278,31 +303,6 @@
           "L"
         ],
         "image": "images/PL/397.png"
-      },
-      {
-        "id": 63,
-        "pos": 12,
-        "name": "Fulham",
-        "short": "Fulham",
-        "played": 29,
-        "won": 12,
-        "drawn": 4,
-        "lost": 13,
-        "gf": 40,
-        "ga": 43,
-        "gd": -3,
-        "pts": 40,
-        "code": 54,
-        "color": "#B0B0B0",
-        "crest": "https://crests.football-data.org/63.png",
-        "form": [
-          "L",
-          "W",
-          "W",
-          "L",
-          "L"
-        ],
-        "image": "images/PL/63.png"
       },
       {
         "id": 71,
@@ -334,23 +334,23 @@
         "pos": 14,
         "name": "Crystal Palace",
         "short": "C. Palace",
-        "played": 29,
+        "played": 30,
         "won": 10,
-        "drawn": 8,
+        "drawn": 9,
         "lost": 11,
         "gf": 33,
         "ga": 35,
         "gd": -2,
-        "pts": 38,
+        "pts": 39,
         "code": 31,
         "color": "#C4122E",
         "crest": "https://crests.football-data.org/354.png",
         "form": [
+          "D",
           "W",
           "L",
           "W",
-          "L",
-          "W"
+          "L"
         ],
         "image": "images/PL/354.png"
       },
@@ -359,23 +359,23 @@
         "pos": 15,
         "name": "Leeds United",
         "short": "Leeds",
-        "played": 29,
+        "played": 30,
         "won": 7,
-        "drawn": 10,
+        "drawn": 11,
         "lost": 12,
         "gf": 37,
         "ga": 48,
         "gd": -11,
-        "pts": 31,
+        "pts": 32,
         "code": 2,
         "color": "#0d3464",
         "crest": "https://crests.football-data.org/341.png",
         "form": [
+          "D",
           "L",
           "L",
           "D",
-          "D",
-          "W"
+          "D"
         ],
         "image": "images/PL/341.png"
       },
@@ -405,8 +405,33 @@
         "image": "images/PL/73.png"
       },
       {
-        "id": 563,
+        "id": 351,
         "pos": 17,
+        "name": "Nottingham Forest",
+        "short": "Nott'm Forest",
+        "played": 30,
+        "won": 7,
+        "drawn": 8,
+        "lost": 15,
+        "gf": 28,
+        "ga": 43,
+        "gd": -15,
+        "pts": 29,
+        "code": 17,
+        "color": "#DD0000",
+        "crest": "https://crests.football-data.org/351.png",
+        "form": [
+          "D",
+          "D",
+          "L",
+          "L",
+          "D"
+        ],
+        "image": "images/PL/351.png"
+      },
+      {
+        "id": 563,
+        "pos": 18,
         "name": "West Ham United",
         "short": "West Ham",
         "played": 30,
@@ -428,31 +453,6 @@
           "D"
         ],
         "image": "images/PL/563.png"
-      },
-      {
-        "id": 351,
-        "pos": 18,
-        "name": "Nottingham Forest",
-        "short": "Nott'm Forest",
-        "played": 29,
-        "won": 7,
-        "drawn": 7,
-        "lost": 15,
-        "gf": 28,
-        "ga": 43,
-        "gd": -15,
-        "pts": 28,
-        "code": 17,
-        "color": "#DD0000",
-        "crest": "https://crests.football-data.org/351.png",
-        "form": [
-          "D",
-          "L",
-          "L",
-          "D",
-          "L"
-        ],
-        "image": "images/PL/351.png"
       },
       {
         "id": 328,
