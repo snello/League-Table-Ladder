@@ -1,0 +1,533 @@
+[
+  {
+    "area": {
+      "id": 2114,
+      "name": "Italy",
+      "code": "ITA",
+      "flag": "https://crests.football-data.org/784.svg"
+    },
+    "competition": {
+      "id": 2019,
+      "name": "Serie A",
+      "code": "SA",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/c111.png"
+    },
+    "season": {
+      "id": 2395,
+      "startDate": "2025-08-24",
+      "endDate": "2026-05-24",
+      "currentMatchday": 29,
+      "winner": null
+    },
+    "id": 537111,
+    "utcDate": "2026-03-22T11:30:00Z",
+    "status": "TIMED",
+    "matchday": 30,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-03-16T01:32:03Z",
+    "homeTeam": {
+      "id": 7397,
+      "name": "Como 1907",
+      "shortName": "Como 1907",
+      "tla": "COM",
+      "crest": "https://crests.football-data.org/7397.png"
+    },
+    "awayTeam": {
+      "id": 487,
+      "name": "AC Pisa 1909",
+      "shortName": "AC Pisa",
+      "tla": "PIS",
+      "crest": "https://crests.football-data.org/487.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2114,
+      "name": "Italy",
+      "code": "ITA",
+      "flag": "https://crests.football-data.org/784.svg"
+    },
+    "competition": {
+      "id": 2019,
+      "name": "Serie A",
+      "code": "SA",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/c111.png"
+    },
+    "season": {
+      "id": 2395,
+      "startDate": "2025-08-24",
+      "endDate": "2026-05-24",
+      "currentMatchday": 29,
+      "winner": null
+    },
+    "id": 537119,
+    "utcDate": "2026-04-05T16:00:00Z",
+    "status": "TIMED",
+    "matchday": 31,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-03-07T00:20:58Z",
+    "homeTeam": {
+      "id": 487,
+      "name": "AC Pisa 1909",
+      "shortName": "AC Pisa",
+      "tla": "PIS",
+      "crest": "https://crests.football-data.org/487.png"
+    },
+    "awayTeam": {
+      "id": 586,
+      "name": "Torino FC",
+      "shortName": "Torino",
+      "tla": "TOR",
+      "crest": "https://crests.football-data.org/586.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2114,
+      "name": "Italy",
+      "code": "ITA",
+      "flag": "https://crests.football-data.org/784.svg"
+    },
+    "competition": {
+      "id": 2019,
+      "name": "Serie A",
+      "code": "SA",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/c111.png"
+    },
+    "season": {
+      "id": 2395,
+      "startDate": "2025-08-24",
+      "endDate": "2026-05-24",
+      "currentMatchday": 29,
+      "winner": null
+    },
+    "id": 537127,
+    "utcDate": "2026-04-12T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 32,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-07-04T12:08:06Z",
+    "homeTeam": {
+      "id": 100,
+      "name": "AS Roma",
+      "shortName": "Roma",
+      "tla": "ROM",
+      "crest": "https://crests.football-data.org/100.png"
+    },
+    "awayTeam": {
+      "id": 487,
+      "name": "AC Pisa 1909",
+      "shortName": "AC Pisa",
+      "tla": "PIS",
+      "crest": "https://crests.football-data.org/487.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2114,
+      "name": "Italy",
+      "code": "ITA",
+      "flag": "https://crests.football-data.org/784.svg"
+    },
+    "competition": {
+      "id": 2019,
+      "name": "Serie A",
+      "code": "SA",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/c111.png"
+    },
+    "season": {
+      "id": 2395,
+      "startDate": "2025-08-24",
+      "endDate": "2026-05-24",
+      "currentMatchday": 29,
+      "winner": null
+    },
+    "id": 537139,
+    "utcDate": "2026-04-19T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 33,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-07-04T12:08:07Z",
+    "homeTeam": {
+      "id": 487,
+      "name": "AC Pisa 1909",
+      "shortName": "AC Pisa",
+      "tla": "PIS",
+      "crest": "https://crests.football-data.org/487.png"
+    },
+    "awayTeam": {
+      "id": 107,
+      "name": "Genoa CFC",
+      "shortName": "Genoa",
+      "tla": "GEN",
+      "crest": "https://crests.football-data.org/107.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2114,
+      "name": "Italy",
+      "code": "ITA",
+      "flag": "https://crests.football-data.org/784.svg"
+    },
+    "competition": {
+      "id": 2019,
+      "name": "Serie A",
+      "code": "SA",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/c111.png"
+    },
+    "season": {
+      "id": 2395,
+      "startDate": "2025-08-24",
+      "endDate": "2026-05-24",
+      "currentMatchday": 29,
+      "winner": null
+    },
+    "id": 537153,
+    "utcDate": "2026-04-26T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 34,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-07-04T12:08:06Z",
+    "homeTeam": {
+      "id": 112,
+      "name": "Parma Calcio 1913",
+      "shortName": "Parma",
+      "tla": "PAR",
+      "crest": "https://crests.football-data.org/112.png"
+    },
+    "awayTeam": {
+      "id": 487,
+      "name": "AC Pisa 1909",
+      "shortName": "AC Pisa",
+      "tla": "PIS",
+      "crest": "https://crests.football-data.org/487.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2114,
+      "name": "Italy",
+      "code": "ITA",
+      "flag": "https://crests.football-data.org/784.svg"
+    },
+    "competition": {
+      "id": 2019,
+      "name": "Serie A",
+      "code": "SA",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/c111.png"
+    },
+    "season": {
+      "id": 2395,
+      "startDate": "2025-08-24",
+      "endDate": "2026-05-24",
+      "currentMatchday": 29,
+      "winner": null
+    },
+    "id": 537161,
+    "utcDate": "2026-05-03T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 35,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-07-04T12:08:06Z",
+    "homeTeam": {
+      "id": 487,
+      "name": "AC Pisa 1909",
+      "shortName": "AC Pisa",
+      "tla": "PIS",
+      "crest": "https://crests.football-data.org/487.png"
+    },
+    "awayTeam": {
+      "id": 5890,
+      "name": "US Lecce",
+      "shortName": "Lecce",
+      "tla": "USL",
+      "crest": "https://crests.football-data.org/5890.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2114,
+      "name": "Italy",
+      "code": "ITA",
+      "flag": "https://crests.football-data.org/784.svg"
+    },
+    "competition": {
+      "id": 2019,
+      "name": "Serie A",
+      "code": "SA",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/c111.png"
+    },
+    "season": {
+      "id": 2395,
+      "startDate": "2025-08-24",
+      "endDate": "2026-05-24",
+      "currentMatchday": 29,
+      "winner": null
+    },
+    "id": 537173,
+    "utcDate": "2026-05-10T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 36,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-07-04T12:08:07Z",
+    "homeTeam": {
+      "id": 457,
+      "name": "US Cremonese",
+      "shortName": "Cremonese",
+      "tla": "CRE",
+      "crest": "https://crests.football-data.org/457.png"
+    },
+    "awayTeam": {
+      "id": 487,
+      "name": "AC Pisa 1909",
+      "shortName": "AC Pisa",
+      "tla": "PIS",
+      "crest": "https://crests.football-data.org/487.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2114,
+      "name": "Italy",
+      "code": "ITA",
+      "flag": "https://crests.football-data.org/784.svg"
+    },
+    "competition": {
+      "id": 2019,
+      "name": "Serie A",
+      "code": "SA",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/c111.png"
+    },
+    "season": {
+      "id": 2395,
+      "startDate": "2025-08-24",
+      "endDate": "2026-05-24",
+      "currentMatchday": 29,
+      "winner": null
+    },
+    "id": 537182,
+    "utcDate": "2026-05-17T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 37,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-07-04T12:08:05Z",
+    "homeTeam": {
+      "id": 487,
+      "name": "AC Pisa 1909",
+      "shortName": "AC Pisa",
+      "tla": "PIS",
+      "crest": "https://crests.football-data.org/487.png"
+    },
+    "awayTeam": {
+      "id": 113,
+      "name": "SSC Napoli",
+      "shortName": "Napoli",
+      "tla": "NAP",
+      "crest": "https://crests.football-data.org/113.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2114,
+      "name": "Italy",
+      "code": "ITA",
+      "flag": "https://crests.football-data.org/784.svg"
+    },
+    "competition": {
+      "id": 2019,
+      "name": "Serie A",
+      "code": "SA",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/c111.png"
+    },
+    "season": {
+      "id": 2395,
+      "startDate": "2025-08-24",
+      "endDate": "2026-05-24",
+      "currentMatchday": 29,
+      "winner": null
+    },
+    "id": 537190,
+    "utcDate": "2026-05-24T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 38,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-07-04T12:08:05Z",
+    "homeTeam": {
+      "id": 110,
+      "name": "SS Lazio",
+      "shortName": "Lazio",
+      "tla": "LAZ",
+      "crest": "https://crests.football-data.org/110.png"
+    },
+    "awayTeam": {
+      "id": 487,
+      "name": "AC Pisa 1909",
+      "shortName": "AC Pisa",
+      "tla": "PIS",
+      "crest": "https://crests.football-data.org/487.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  }
+]

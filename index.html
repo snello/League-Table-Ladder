@@ -66,7 +66,7 @@
                 background: transparent;
                 border: none;
                 color: #fff;
-                font-family: 'Inter', sans-serif;
+                font-family: "Inter", sans-serif;
                 font-size: 15px;
                 font-weight: 800;
                 letter-spacing: 0.2px;
@@ -611,31 +611,6 @@
                 margin-top: 3px;
             }
 
-            /* ── Recent form dots (current mode toast, inside t-info) ── */
-            .t-form-dots {
-                display: flex;
-                gap: 4px;
-                margin-top: 6px;
-            }
-            .t-form-dot {
-                width: 18px;
-                height: 18px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 9px;
-                font-weight: 700;
-                color: #000;
-            }
-            .t-form-dot.W { background: #4ade80; }
-            .t-form-dot.D { background: #fbbf24; }
-            .t-form-dot.L { background: #f87171; }
-            .t-form-dot.empty {
-                background: rgba(255, 255, 255, 0.1);
-                color: rgba(255, 255, 255, 0.2);
-            }
-
             /* ── Fixtures strip ── */
             .fixtures-section {
                 margin-top: 14px;
@@ -657,7 +632,9 @@
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
             }
-            .fixtures-strip::-webkit-scrollbar { display: none; }
+            .fixtures-strip::-webkit-scrollbar {
+                display: none;
+            }
             .fixture-card {
                 flex-shrink: 0;
                 width: 62px;
@@ -670,10 +647,16 @@
                 align-items: center;
                 gap: 4px;
                 border: 1px solid rgba(255, 255, 255, 0.08);
-                transition: background 0.15s, border-color 0.15s;
+                transition:
+                    background 0.15s,
+                    border-color 0.15s;
             }
-            .fixture-card:hover { background: rgba(255, 255, 255, 0.11); }
-            .fixture-card.has-result { border-color: rgba(212, 175, 55, 0.35); }
+            .fixture-card:hover {
+                background: rgba(255, 255, 255, 0.11);
+            }
+            .fixture-card.has-result {
+                border-color: rgba(212, 175, 55, 0.35);
+            }
             .fixture-date {
                 font-size: 9px;
                 color: rgba(255, 255, 255, 0.38);
@@ -712,9 +695,18 @@
                 align-items: center;
                 justify-content: center;
             }
-            .fixture-result-pill.w { background: rgba(74,222,128,0.2); color: #4ade80; }
-            .fixture-result-pill.d { background: rgba(251,191,36,0.2); color: #fbbf24; }
-            .fixture-result-pill.l { background: rgba(248,113,113,0.2); color: #f87171; }
+            .fixture-result-pill.w {
+                background: rgba(74, 222, 128, 0.2);
+                color: #4ade80;
+            }
+            .fixture-result-pill.d {
+                background: rgba(251, 191, 36, 0.2);
+                color: #fbbf24;
+            }
+            .fixture-result-pill.l {
+                background: rgba(248, 113, 113, 0.2);
+                color: #f87171;
+            }
 
             /* ── Result picker ── */
             .result-picker-overlay {
@@ -766,30 +758,57 @@
                 height: 50px;
                 border-radius: 10px;
                 border: 2px solid transparent;
-                font-family: 'Inter', sans-serif;
+                font-family: "Inter", sans-serif;
                 font-size: 18px;
                 font-weight: 800;
                 cursor: pointer;
-                transition: transform 0.1s, box-shadow 0.15s;
+                transition:
+                    transform 0.1s,
+                    box-shadow 0.15s;
             }
-            .result-btn:active { transform: scale(0.92); }
-            .result-btn.w { background: rgba(74,222,128,0.12); color: #4ade80; border-color: rgba(74,222,128,0.25); }
-            .result-btn.d { background: rgba(251,191,36,0.12); color: #fbbf24; border-color: rgba(251,191,36,0.25); }
-            .result-btn.l { background: rgba(248,113,113,0.12); color: #f87171; border-color: rgba(248,113,113,0.25); }
-            .result-btn.selected.w { border-color: #4ade80; box-shadow: 0 0 14px rgba(74,222,128,0.5); }
-            .result-btn.selected.d { border-color: #fbbf24; box-shadow: 0 0 14px rgba(251,191,36,0.5); }
-            .result-btn.selected.l { border-color: #f87171; box-shadow: 0 0 14px rgba(248,113,113,0.5); }
+            .result-btn:active {
+                transform: scale(0.92);
+            }
+            .result-btn.w {
+                background: rgba(74, 222, 128, 0.12);
+                color: #4ade80;
+                border-color: rgba(74, 222, 128, 0.25);
+            }
+            .result-btn.d {
+                background: rgba(251, 191, 36, 0.12);
+                color: #fbbf24;
+                border-color: rgba(251, 191, 36, 0.25);
+            }
+            .result-btn.l {
+                background: rgba(248, 113, 113, 0.12);
+                color: #f87171;
+                border-color: rgba(248, 113, 113, 0.25);
+            }
+            .result-btn.selected.w {
+                border-color: #4ade80;
+                box-shadow: 0 0 14px rgba(74, 222, 128, 0.5);
+            }
+            .result-btn.selected.d {
+                border-color: #fbbf24;
+                box-shadow: 0 0 14px rgba(251, 191, 36, 0.5);
+            }
+            .result-btn.selected.l {
+                border-color: #f87171;
+                box-shadow: 0 0 14px rgba(248, 113, 113, 0.5);
+            }
             .result-picker-clear {
                 background: none;
                 border: none;
                 color: rgba(255, 255, 255, 0.3);
-                font-family: 'Inter', sans-serif;
+                font-family: "Inter", sans-serif;
                 font-size: 11px;
                 cursor: pointer;
                 padding: 2px 8px;
                 text-decoration: underline;
             }
-            .result-picker-clear:hover { color: rgba(255, 255, 255, 0.6); }
+            .result-picker-clear:hover {
+                color: rgba(255, 255, 255, 0.6);
+            }
 
             /* ── Desktop ── */
             @media (min-width: 580px) {
@@ -952,7 +971,6 @@
                 <div class="t-info">
                     <div class="t-name" id="tName">—</div>
                     <div class="t-sub" id="tSub">—</div>
-                    <div class="t-form-dots" id="tFormDots" style="display:none"></div>
                 </div>
                 <div style="text-align: center; margin-right: 6px">
                     <div class="t-pts" id="tPts">—</div>
@@ -965,7 +983,7 @@
                 <button class="t-close" onclick="closeToast()" aria-label="Close">✕</button>
             </div>
             <div class="stats-grid" id="statsGrid"></div>
-            <div class="fixtures-section" id="fixturesSection" style="display:none">
+            <div class="fixtures-section" id="fixturesSection" style="display: none">
                 <div class="fixtures-label">Remaining Fixtures</div>
                 <div class="fixtures-strip" id="fixturesStrip"></div>
             </div>
@@ -980,7 +998,7 @@
                     <button class="result-btn d" id="pickerD">D</button>
                     <button class="result-btn l" id="pickerL">L</button>
                 </div>
-                <button class="result-picker-clear" id="pickerClear" style="display:none">Clear result</button>
+                <button class="result-picker-clear" id="pickerClear" style="display: none">Clear result</button>
             </div>
         </div>
 
@@ -995,15 +1013,19 @@
             // ─── Team data (loaded from data.json) ───────────────────────────────────────
             let TEAMS = [];
             let currentLeagueId = "PL";
-            let teamFixtures = {};      // { [teamId]: [...matchObjects] }
+            let teamFixtures = {}; // { [teamId]: [...matchObjects] }
             let fixturesLeagueId = null;
             let pickerMatchId = null;
             let pickerTeamId = null;
             let pickerIsHome = false;
 
             // ─── Fixture result storage ───────────────────────────────────────────────────
-            function resultsKey() { return `ladder_${currentLeagueId}_results`; }
-            function getResults() { return JSON.parse(localStorage.getItem(resultsKey()) ?? "{}"); }
+            function resultsKey() {
+                return `ladder_${currentLeagueId}_results`;
+            }
+            function getResults() {
+                return JSON.parse(localStorage.getItem(resultsKey()) ?? "{}");
+            }
             function setResult(matchId, val) {
                 const r = getResults();
                 if (val === null) delete r[String(matchId)];
@@ -1053,7 +1075,8 @@
 
                 // Use fixture data + user-set results
                 const results = getResults();
-                let userPts = 0, userCount = 0;
+                let userPts = 0,
+                    userCount = 0;
                 for (const match of fixtures) {
                     const stored = results[String(match.id)];
                     if (!stored) continue;
@@ -1357,12 +1380,16 @@
             async function loadFixtures(leagueId) {
                 if (fixturesLeagueId === leagueId) return;
                 teamFixtures = {};
-                await Promise.all(TEAMS.map(async (team) => {
-                    try {
-                        const r = await fetch(`fixtures/${leagueId}/${team.id}.json`);
-                        if (r.ok) teamFixtures[team.id] = await r.json();
-                    } catch { /* fixture file may not exist yet */ }
-                }));
+                await Promise.all(
+                    TEAMS.map(async (team) => {
+                        try {
+                            const r = await fetch(`fixtures/${leagueId}/${team.id}.json`);
+                            if (r.ok) teamFixtures[team.id] = await r.json();
+                        } catch {
+                            /* fixture file may not exist yet */
+                        }
+                    }),
+                );
                 fixturesLeagueId = leagueId;
             }
 
@@ -1381,8 +1408,7 @@
                 // Update subtitle
                 const season = league.season ? `${league.season}/${String(parseInt(league.season) + 1).slice(2)}` : "";
                 const md = league.matchday ? `Matchday ${league.matchday}` : "";
-                document.getElementById("headerSub").textContent =
-                    ["Points Ladder", season, md].filter(Boolean).join(" · ");
+                document.getElementById("headerSub").textContent = ["Points Ladder", season, md].filter(Boolean).join(" · ");
 
                 // Sync select value
                 document.getElementById("leagueSelect").value = leagueId;
@@ -1426,8 +1452,7 @@
 
                     select.addEventListener("change", (e) => switchLeague(e.target.value));
 
-                    const leagueId = new URLSearchParams(window.location.search).get("leagueid")
-                        ?? (availableKeys.includes("PL") ? "PL" : availableKeys[0]);
+                    const leagueId = new URLSearchParams(window.location.search).get("leagueid") ?? (availableKeys.includes("PL") ? "PL" : availableKeys[0]);
                     switchLeague(leagueId);
                 })
                 .catch((err) => {
@@ -1479,21 +1504,6 @@
 
                 document.getElementById("statsGrid").innerHTML = stats.map((s) => `<div class="stat"><div class="stat-v ${s.cls}">${s.v}</div><div class="stat-k">${s.k}</div></div>`).join("");
 
-                // Show form dots in Current mode
-                const dots = document.getElementById("tFormDots");
-                if (!isFinal) {
-                    const last5 = team.form.slice(-5);
-                    dots.innerHTML = Array.from({ length: 5 }, (_, i) => {
-                        const r = last5[i] ?? null;
-                        return r
-                            ? `<div class="t-form-dot ${r}">${r}</div>`
-                            : `<div class="t-form-dot empty">·</div>`;
-                    }).join("");
-                    dots.style.display = "";
-                } else {
-                    dots.style.display = "none";
-                }
-
                 // Show fixture strip in Final mode
                 if (isFinal) {
                     renderFixtureStrip(team);
@@ -1532,9 +1542,7 @@
                     card.className = "fixture-card" + (stored ? " has-result" : "");
 
                     const badgeSrc = oppTeam ? (badgeUrl(oppTeam) ?? "") : (opp.crest ?? "");
-                    const pillHtml = resultCode
-                        ? `<div class="fixture-result-pill ${resultCode.toLowerCase()}">${resultCode}</div>`
-                        : `<div style="height:16px"></div>`;
+                    const pillHtml = resultCode ? `<div class="fixture-result-pill ${resultCode.toLowerCase()}">${resultCode}</div>` : `<div style="height:16px"></div>`;
 
                     card.innerHTML = `
                         <div class="fixture-date">${dateStr}</div>

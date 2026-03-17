@@ -1,0 +1,415 @@
+[
+  {
+    "area": {
+      "id": 2163,
+      "name": "Netherlands",
+      "code": "NLD",
+      "flag": "https://crests.football-data.org/8601.svg"
+    },
+    "competition": {
+      "id": 2003,
+      "name": "Eredivisie",
+      "code": "DED",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/ED.png"
+    },
+    "season": {
+      "id": 2400,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 27,
+      "winner": null
+    },
+    "id": 537692,
+    "utcDate": "2026-03-22T15:45:00Z",
+    "status": "TIMED",
+    "matchday": 28,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-03-16T01:32:04Z",
+    "homeTeam": {
+      "id": 1912,
+      "name": "Telstar 1963",
+      "shortName": "Telstar",
+      "tla": "TEL",
+      "crest": "https://crests.football-data.org/1912.png"
+    },
+    "awayTeam": {
+      "id": 674,
+      "name": "PSV",
+      "shortName": "PSV",
+      "tla": "PSV",
+      "crest": "https://crests.football-data.org/674.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2163,
+      "name": "Netherlands",
+      "code": "NLD",
+      "flag": "https://crests.football-data.org/8601.svg"
+    },
+    "competition": {
+      "id": 2003,
+      "name": "Eredivisie",
+      "code": "DED",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/ED.png"
+    },
+    "season": {
+      "id": 2400,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 27,
+      "winner": null
+    },
+    "id": 537699,
+    "utcDate": "2026-04-04T14:30:00Z",
+    "status": "TIMED",
+    "matchday": 29,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-01-02T15:21:03Z",
+    "homeTeam": {
+      "id": 674,
+      "name": "PSV",
+      "shortName": "PSV",
+      "tla": "PSV",
+      "crest": "https://crests.football-data.org/674.png"
+    },
+    "awayTeam": {
+      "id": 676,
+      "name": "FC Utrecht",
+      "shortName": "Utrecht",
+      "tla": "UTR",
+      "crest": "https://crests.football-data.org/676.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2163,
+      "name": "Netherlands",
+      "code": "NLD",
+      "flag": "https://crests.football-data.org/8601.svg"
+    },
+    "competition": {
+      "id": 2003,
+      "name": "Eredivisie",
+      "code": "DED",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/ED.png"
+    },
+    "season": {
+      "id": 2400,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 27,
+      "winner": null
+    },
+    "id": 537709,
+    "utcDate": "2026-04-11T16:45:00Z",
+    "status": "TIMED",
+    "matchday": 30,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-01-02T15:21:03Z",
+    "homeTeam": {
+      "id": 6806,
+      "name": "Sparta Rotterdam",
+      "shortName": "Sparta",
+      "tla": "SPA",
+      "crest": "https://crests.football-data.org/6806.png"
+    },
+    "awayTeam": {
+      "id": 674,
+      "name": "PSV",
+      "shortName": "PSV",
+      "tla": "PSV",
+      "crest": "https://crests.football-data.org/674.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2163,
+      "name": "Netherlands",
+      "code": "NLD",
+      "flag": "https://crests.football-data.org/8601.svg"
+    },
+    "competition": {
+      "id": 2003,
+      "name": "Eredivisie",
+      "code": "DED",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/ED.png"
+    },
+    "season": {
+      "id": 2400,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 27,
+      "winner": null
+    },
+    "id": 537716,
+    "utcDate": "2026-04-23T19:00:00Z",
+    "status": "TIMED",
+    "matchday": 31,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-01-02T15:21:03Z",
+    "homeTeam": {
+      "id": 674,
+      "name": "PSV",
+      "shortName": "PSV",
+      "tla": "PSV",
+      "crest": "https://crests.football-data.org/674.png"
+    },
+    "awayTeam": {
+      "id": 684,
+      "name": "PEC Zwolle",
+      "shortName": "Zwolle",
+      "tla": "ZWO",
+      "crest": "https://crests.football-data.org/684.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2163,
+      "name": "Netherlands",
+      "code": "NLD",
+      "flag": "https://crests.football-data.org/8601.svg"
+    },
+    "competition": {
+      "id": 2003,
+      "name": "Eredivisie",
+      "code": "DED",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/ED.png"
+    },
+    "season": {
+      "id": 2400,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 27,
+      "winner": null
+    },
+    "id": 537720,
+    "utcDate": "2026-05-02T18:00:00Z",
+    "status": "TIMED",
+    "matchday": 32,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-01-02T15:21:03Z",
+    "homeTeam": {
+      "id": 678,
+      "name": "AFC Ajax",
+      "shortName": "Ajax",
+      "tla": "AJA",
+      "crest": "https://crests.football-data.org/678.png"
+    },
+    "awayTeam": {
+      "id": 674,
+      "name": "PSV",
+      "shortName": "PSV",
+      "tla": "PSV",
+      "crest": "https://crests.football-data.org/674.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2163,
+      "name": "Netherlands",
+      "code": "NLD",
+      "flag": "https://crests.football-data.org/8601.svg"
+    },
+    "competition": {
+      "id": 2003,
+      "name": "Eredivisie",
+      "code": "DED",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/ED.png"
+    },
+    "season": {
+      "id": 2400,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 27,
+      "winner": null
+    },
+    "id": 537734,
+    "utcDate": "2026-05-10T14:45:00Z",
+    "status": "TIMED",
+    "matchday": 33,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-08-29T05:20:56Z",
+    "homeTeam": {
+      "id": 718,
+      "name": "Go Ahead Eagles",
+      "shortName": "Go Ahead",
+      "tla": "GOA",
+      "crest": "https://crests.football-data.org/718.png"
+    },
+    "awayTeam": {
+      "id": 674,
+      "name": "PSV",
+      "shortName": "PSV",
+      "tla": "PSV",
+      "crest": "https://crests.football-data.org/674.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2163,
+      "name": "Netherlands",
+      "code": "NLD",
+      "flag": "https://crests.football-data.org/8601.svg"
+    },
+    "competition": {
+      "id": 2003,
+      "name": "Eredivisie",
+      "code": "DED",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/ED.png"
+    },
+    "season": {
+      "id": 2400,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 27,
+      "winner": null
+    },
+    "id": 537744,
+    "utcDate": "2026-05-17T12:30:00Z",
+    "status": "TIMED",
+    "matchday": 34,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-08-29T05:20:56Z",
+    "homeTeam": {
+      "id": 674,
+      "name": "PSV",
+      "shortName": "PSV",
+      "tla": "PSV",
+      "crest": "https://crests.football-data.org/674.png"
+    },
+    "awayTeam": {
+      "id": 666,
+      "name": "FC Twente '65",
+      "shortName": "Twente",
+      "tla": "TWE",
+      "crest": "https://crests.football-data.org/666.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  }
+]

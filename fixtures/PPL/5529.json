@@ -1,0 +1,474 @@
+[
+  {
+    "area": {
+      "id": 2187,
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "https://crests.football-data.org/765.svg"
+    },
+    "competition": {
+      "id": 2017,
+      "name": "Primeira Liga",
+      "code": "PPL",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/PPL.png"
+    },
+    "season": {
+      "id": 2433,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 545939,
+    "utcDate": "2026-03-21T15:30:00Z",
+    "status": "TIMED",
+    "matchday": 27,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-03-16T01:32:03Z",
+    "homeTeam": {
+      "id": 5531,
+      "name": "FC Famalicão",
+      "shortName": "Famalicão",
+      "tla": "FAM",
+      "crest": "https://crests.football-data.org/5531.png"
+    },
+    "awayTeam": {
+      "id": 5529,
+      "name": "CD Nacional",
+      "shortName": "CD Nacional",
+      "tla": "CDN",
+      "crest": "https://crests.football-data.org/5529.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2187,
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "https://crests.football-data.org/765.svg"
+    },
+    "competition": {
+      "id": 2017,
+      "name": "Primeira Liga",
+      "code": "PPL",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/PPL.png"
+    },
+    "season": {
+      "id": 2433,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 545944,
+    "utcDate": "2026-04-04T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 28,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-08-15T13:37:07Z",
+    "homeTeam": {
+      "id": 5529,
+      "name": "CD Nacional",
+      "shortName": "CD Nacional",
+      "tla": "CDN",
+      "crest": "https://crests.football-data.org/5529.png"
+    },
+    "awayTeam": {
+      "id": 9136,
+      "name": "CF Estrela da Amadora",
+      "shortName": "Amadora",
+      "tla": "AMA",
+      "crest": "https://crests.football-data.org/9136.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2187,
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "https://crests.football-data.org/765.svg"
+    },
+    "competition": {
+      "id": 2017,
+      "name": "Primeira Liga",
+      "code": "PPL",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/PPL.png"
+    },
+    "season": {
+      "id": 2433,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 545960,
+    "utcDate": "2026-04-12T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 29,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-08-29T05:20:57Z",
+    "homeTeam": {
+      "id": 1903,
+      "name": "Sport Lisboa e Benfica",
+      "shortName": "SL Benfica",
+      "tla": "BEN",
+      "crest": "https://crests.football-data.org/1903.png"
+    },
+    "awayTeam": {
+      "id": 5529,
+      "name": "CD Nacional",
+      "shortName": "CD Nacional",
+      "tla": "CDN",
+      "crest": "https://crests.football-data.org/5529.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2187,
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "https://crests.football-data.org/765.svg"
+    },
+    "competition": {
+      "id": 2017,
+      "name": "Primeira Liga",
+      "code": "PPL",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/PPL.png"
+    },
+    "season": {
+      "id": 2433,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 545963,
+    "utcDate": "2026-04-19T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 30,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-08-15T13:37:37Z",
+    "homeTeam": {
+      "id": 5529,
+      "name": "CD Nacional",
+      "shortName": "CD Nacional",
+      "tla": "CDN",
+      "crest": "https://crests.football-data.org/5529.png"
+    },
+    "awayTeam": {
+      "id": 7822,
+      "name": "FC Alverca",
+      "shortName": "Alverca",
+      "tla": "ALV",
+      "crest": "https://crests.football-data.org/7822.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2187,
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "https://crests.football-data.org/765.svg"
+    },
+    "competition": {
+      "id": 2017,
+      "name": "Primeira Liga",
+      "code": "PPL",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/PPL.png"
+    },
+    "season": {
+      "id": 2433,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 545971,
+    "utcDate": "2026-04-26T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 31,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-08-15T13:38:48Z",
+    "homeTeam": {
+      "id": 1049,
+      "name": "CD Tondela",
+      "shortName": "Tondela",
+      "tla": "TON",
+      "crest": "https://crests.football-data.org/1049.png"
+    },
+    "awayTeam": {
+      "id": 5529,
+      "name": "CD Nacional",
+      "shortName": "CD Nacional",
+      "tla": "CDN",
+      "crest": "https://crests.football-data.org/5529.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2187,
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "https://crests.football-data.org/765.svg"
+    },
+    "competition": {
+      "id": 2017,
+      "name": "Primeira Liga",
+      "code": "PPL",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/PPL.png"
+    },
+    "season": {
+      "id": 2433,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 545979,
+    "utcDate": "2026-05-03T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 32,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-08-15T13:37:06Z",
+    "homeTeam": {
+      "id": 5529,
+      "name": "CD Nacional",
+      "shortName": "CD Nacional",
+      "tla": "CDN",
+      "crest": "https://crests.football-data.org/5529.png"
+    },
+    "awayTeam": {
+      "id": 10340,
+      "name": "AVS",
+      "shortName": "AVS",
+      "tla": "AVS",
+      "crest": "https://crests.football-data.org/10340.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2187,
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "https://crests.football-data.org/765.svg"
+    },
+    "competition": {
+      "id": 2017,
+      "name": "Primeira Liga",
+      "code": "PPL",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/PPL.png"
+    },
+    "season": {
+      "id": 2433,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 545995,
+    "utcDate": "2026-05-10T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 33,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-08-15T13:37:07Z",
+    "homeTeam": {
+      "id": 5530,
+      "name": "CD Santa Clara",
+      "shortName": "Santa Clara",
+      "tla": "CD ",
+      "crest": "https://crests.football-data.org/5530.png"
+    },
+    "awayTeam": {
+      "id": 5529,
+      "name": "CD Nacional",
+      "shortName": "CD Nacional",
+      "tla": "CDN",
+      "crest": "https://crests.football-data.org/5529.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2187,
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "https://crests.football-data.org/765.svg"
+    },
+    "competition": {
+      "id": 2017,
+      "name": "Primeira Liga",
+      "code": "PPL",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/PPL.png"
+    },
+    "season": {
+      "id": 2433,
+      "startDate": "2025-08-08",
+      "endDate": "2026-05-17",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 546002,
+    "utcDate": "2026-05-17T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 34,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-08-15T13:37:06Z",
+    "homeTeam": {
+      "id": 5529,
+      "name": "CD Nacional",
+      "shortName": "CD Nacional",
+      "tla": "CDN",
+      "crest": "https://crests.football-data.org/5529.png"
+    },
+    "awayTeam": {
+      "id": 5543,
+      "name": "Vitória SC",
+      "shortName": "Vitória SC",
+      "tla": "GUI",
+      "crest": "https://crests.football-data.org/5543.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  }
+]

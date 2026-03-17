@@ -1,0 +1,540 @@
+[
+  {
+    "area": {
+      "id": 2088,
+      "name": "Germany",
+      "code": "DEU",
+      "flag": "https://crests.football-data.org/759.svg"
+    },
+    "competition": {
+      "id": 2002,
+      "name": "Bundesliga",
+      "code": "BL1",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/BL1.png"
+    },
+    "season": {
+      "id": 2414,
+      "startDate": "2025-08-22",
+      "endDate": "2026-05-16",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 540636,
+    "utcDate": "2026-03-15T16:30:00Z",
+    "status": "FINISHED",
+    "matchday": 26,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-03-16T00:21:03Z",
+    "homeTeam": {
+      "id": 17,
+      "name": "SC Freiburg",
+      "shortName": "Freiburg",
+      "tla": "SCF",
+      "crest": "https://crests.football-data.org/17.png"
+    },
+    "awayTeam": {
+      "id": 28,
+      "name": "1. FC Union Berlin",
+      "shortName": "Union Berlin",
+      "tla": "UNB",
+      "crest": "https://crests.football-data.org/28.png"
+    },
+    "score": {
+      "winner": "AWAY_TEAM",
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": 0,
+        "away": 1
+      },
+      "halfTime": {
+        "home": 0,
+        "away": 0
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": [
+      {
+        "id": 15824,
+        "name": "Sven Jablonski",
+        "type": "REFEREE",
+        "nationality": "Germany"
+      }
+    ]
+  },
+  {
+    "area": {
+      "id": 2088,
+      "name": "Germany",
+      "code": "DEU",
+      "flag": "https://crests.football-data.org/759.svg"
+    },
+    "competition": {
+      "id": 2002,
+      "name": "Bundesliga",
+      "code": "BL1",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/BL1.png"
+    },
+    "season": {
+      "id": 2414,
+      "startDate": "2025-08-22",
+      "endDate": "2026-05-16",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 540642,
+    "utcDate": "2026-03-22T16:30:00Z",
+    "status": "TIMED",
+    "matchday": 27,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-02-04T15:21:04Z",
+    "homeTeam": {
+      "id": 20,
+      "name": "FC St. Pauli 1910",
+      "shortName": "St. Pauli",
+      "tla": "STP",
+      "crest": "https://crests.football-data.org/20.png"
+    },
+    "awayTeam": {
+      "id": 17,
+      "name": "SC Freiburg",
+      "shortName": "Freiburg",
+      "tla": "SCF",
+      "crest": "https://crests.football-data.org/17.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2088,
+      "name": "Germany",
+      "code": "DEU",
+      "flag": "https://crests.football-data.org/759.svg"
+    },
+    "competition": {
+      "id": 2002,
+      "name": "Bundesliga",
+      "code": "BL1",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/BL1.png"
+    },
+    "season": {
+      "id": 2414,
+      "startDate": "2025-08-22",
+      "endDate": "2026-05-16",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 540649,
+    "utcDate": "2026-04-04T13:30:00Z",
+    "status": "TIMED",
+    "matchday": 28,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-03-05T15:21:05Z",
+    "homeTeam": {
+      "id": 17,
+      "name": "SC Freiburg",
+      "shortName": "Freiburg",
+      "tla": "SCF",
+      "crest": "https://crests.football-data.org/17.png"
+    },
+    "awayTeam": {
+      "id": 5,
+      "name": "FC Bayern München",
+      "shortName": "Bayern",
+      "tla": "FCB",
+      "crest": "https://crests.football-data.org/5.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2088,
+      "name": "Germany",
+      "code": "DEU",
+      "flag": "https://crests.football-data.org/759.svg"
+    },
+    "competition": {
+      "id": 2002,
+      "name": "Bundesliga",
+      "code": "BL1",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/BL1.png"
+    },
+    "season": {
+      "id": 2414,
+      "startDate": "2025-08-22",
+      "endDate": "2026-05-16",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 540661,
+    "utcDate": "2026-04-12T17:30:00Z",
+    "status": "TIMED",
+    "matchday": 29,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-03-05T15:21:05Z",
+    "homeTeam": {
+      "id": 15,
+      "name": "1. FSV Mainz 05",
+      "shortName": "Mainz",
+      "tla": "M05",
+      "crest": "https://crests.football-data.org/15.png"
+    },
+    "awayTeam": {
+      "id": 17,
+      "name": "SC Freiburg",
+      "shortName": "Freiburg",
+      "tla": "SCF",
+      "crest": "https://crests.football-data.org/17.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2088,
+      "name": "Germany",
+      "code": "DEU",
+      "flag": "https://crests.football-data.org/759.svg"
+    },
+    "competition": {
+      "id": 2002,
+      "name": "Bundesliga",
+      "code": "BL1",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/BL1.png"
+    },
+    "season": {
+      "id": 2414,
+      "startDate": "2025-08-22",
+      "endDate": "2026-05-16",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 540672,
+    "utcDate": "2026-04-19T13:30:00Z",
+    "status": "TIMED",
+    "matchday": 30,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-03-05T15:21:05Z",
+    "homeTeam": {
+      "id": 17,
+      "name": "SC Freiburg",
+      "shortName": "Freiburg",
+      "tla": "SCF",
+      "crest": "https://crests.football-data.org/17.png"
+    },
+    "awayTeam": {
+      "id": 44,
+      "name": "1. FC Heidenheim 1846",
+      "shortName": "Heidenheim",
+      "tla": "HEI",
+      "crest": "https://crests.football-data.org/44.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2088,
+      "name": "Germany",
+      "code": "DEU",
+      "flag": "https://crests.football-data.org/759.svg"
+    },
+    "competition": {
+      "id": 2002,
+      "name": "Bundesliga",
+      "code": "BL1",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/BL1.png"
+    },
+    "season": {
+      "id": 2414,
+      "startDate": "2025-08-22",
+      "endDate": "2026-05-16",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 540679,
+    "utcDate": "2026-04-25T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 31,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-08-29T05:20:56Z",
+    "homeTeam": {
+      "id": 4,
+      "name": "Borussia Dortmund",
+      "shortName": "Dortmund",
+      "tla": "BVB",
+      "crest": "https://crests.football-data.org/4.png"
+    },
+    "awayTeam": {
+      "id": 17,
+      "name": "SC Freiburg",
+      "shortName": "Freiburg",
+      "tla": "SCF",
+      "crest": "https://crests.football-data.org/17.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2088,
+      "name": "Germany",
+      "code": "DEU",
+      "flag": "https://crests.football-data.org/759.svg"
+    },
+    "competition": {
+      "id": 2002,
+      "name": "Bundesliga",
+      "code": "BL1",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/BL1.png"
+    },
+    "season": {
+      "id": 2414,
+      "startDate": "2025-08-22",
+      "endDate": "2026-05-16",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 540689,
+    "utcDate": "2026-05-02T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 32,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2026-03-16T00:21:03Z",
+    "homeTeam": {
+      "id": 17,
+      "name": "SC Freiburg",
+      "shortName": "Freiburg",
+      "tla": "SCF",
+      "crest": "https://crests.football-data.org/17.png"
+    },
+    "awayTeam": {
+      "id": 11,
+      "name": "VfL Wolfsburg",
+      "shortName": "Wolfsburg",
+      "tla": "WOB",
+      "crest": "https://crests.football-data.org/11.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2088,
+      "name": "Germany",
+      "code": "DEU",
+      "flag": "https://crests.football-data.org/759.svg"
+    },
+    "competition": {
+      "id": 2002,
+      "name": "Bundesliga",
+      "code": "BL1",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/BL1.png"
+    },
+    "season": {
+      "id": 2414,
+      "startDate": "2025-08-22",
+      "endDate": "2026-05-16",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 540697,
+    "utcDate": "2026-05-09T00:00:00Z",
+    "status": "SCHEDULED",
+    "matchday": 33,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-06-27T16:59:49Z",
+    "homeTeam": {
+      "id": 7,
+      "name": "Hamburger SV",
+      "shortName": "HSV",
+      "tla": "HSV",
+      "crest": "https://crests.football-data.org/7.png"
+    },
+    "awayTeam": {
+      "id": 17,
+      "name": "SC Freiburg",
+      "shortName": "Freiburg",
+      "tla": "SCF",
+      "crest": "https://crests.football-data.org/17.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  },
+  {
+    "area": {
+      "id": 2088,
+      "name": "Germany",
+      "code": "DEU",
+      "flag": "https://crests.football-data.org/759.svg"
+    },
+    "competition": {
+      "id": 2002,
+      "name": "Bundesliga",
+      "code": "BL1",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/BL1.png"
+    },
+    "season": {
+      "id": 2414,
+      "startDate": "2025-08-22",
+      "endDate": "2026-05-16",
+      "currentMatchday": 26,
+      "winner": null
+    },
+    "id": 540705,
+    "utcDate": "2026-05-16T13:30:00Z",
+    "status": "TIMED",
+    "matchday": 34,
+    "stage": "REGULAR_SEASON",
+    "group": null,
+    "lastUpdated": "2025-06-27T16:59:50Z",
+    "homeTeam": {
+      "id": 17,
+      "name": "SC Freiburg",
+      "shortName": "Freiburg",
+      "tla": "SCF",
+      "crest": "https://crests.football-data.org/17.png"
+    },
+    "awayTeam": {
+      "id": 721,
+      "name": "RB Leipzig",
+      "shortName": "RB Leipzig",
+      "tla": "RBL",
+      "crest": "https://crests.football-data.org/721.png"
+    },
+    "score": {
+      "winner": null,
+      "duration": "REGULAR",
+      "fullTime": {
+        "home": null,
+        "away": null
+      },
+      "halfTime": {
+        "home": null,
+        "away": null
+      }
+    },
+    "odds": {
+      "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+    },
+    "referees": []
+  }
+]
