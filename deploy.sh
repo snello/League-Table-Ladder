@@ -28,23 +28,23 @@ echo "Syncing to S3…"
 
 sync_output=""
 
-# Static files at root
-sync_output+=$(aws s3 sync . "$BUCKET/" \
-  --exclude "*" \
-  --include "index.html" \
-  --include "data.json" \
-  --include "comps.json" 2>&1)
-sync_output+=$'\n'
+# Static files at root — use cp (always uploads, no timestamp/size guessing)
+for f in data.json comps.json; do
+  if [ -f "$f" ]; then
+    sync_output+=$(aws s3 cp "$f" "$BUCKET/$f" --no-progress 2>&1)
+    sync_output+=$'\n'
+  fi
+done
 
 # Team badge images (skip silently if directory doesn't exist yet)
 if [ -d images ]; then
-  sync_output+=$(aws s3 sync images/ "$BUCKET/images/" 2>&1)
+  sync_output+=$(aws s3 sync images/ "$BUCKET/images/" --no-progress 2>&1)
   sync_output+=$'\n'
 fi
 
 # Fixture JSON files (skip silently if directory doesn't exist yet)
 if [ -d fixtures ]; then
-  sync_output+=$(aws s3 sync fixtures/ "$BUCKET/fixtures/" 2>&1)
+  sync_output+=$(aws s3 sync fixtures/ "$BUCKET/fixtures/" --no-progress 2>&1)
   sync_output+=$'\n'
 fi
 
