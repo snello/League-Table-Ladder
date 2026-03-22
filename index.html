@@ -1070,10 +1070,10 @@
             }
 
             function calcProjectedPts(team, n) {
-                const recent = team.form.slice(-n);
+                const recent = team.form.slice(0, n);
                 const ppg = recent.reduce((s, r) => s + resultPts(r), 0) / n;
-
-                const fixtures = teamFixtures[team.id];
+                let fixtures = teamFixtures[team.id];
+                fixtures = fixtures.filter((f) => new Date(f.utcDate) >= new Date());
                 if (!fixtures) {
                     const gamesRemaining = (TEAMS.length - 1) * 2 - team.played;
                     return Math.round(team.pts + ppg * gamesRemaining);
@@ -1489,7 +1489,7 @@
                 document.getElementById("tPlayedLbl").textContent = isFinal ? "to play" : "played";
 
                 const gdStr = (team.gd >= 0 ? "+" : "") + team.gd;
-                const recentForm = team.form.slice(-formGames).join(" ");
+                const recentForm = team.form.slice(0, formGames).join(" ");
                 const stats = isFinal
                     ? [
                           { v: team.pts, k: "Current pts", cls: "" },
@@ -1540,6 +1540,9 @@
                     const opp = isHome ? match.awayTeam : match.homeTeam;
                     const oppTeam = TEAMS.find((t) => t.id === opp.id);
                     const date = new Date(match.utcDate);
+                    if (date < new Date()) {
+                        return;
+                    }
                     const dateStr = date.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
                     const stored = results[String(match.id)];
                     const resultCode = stored ? teamResult(stored, isHome) : null;
