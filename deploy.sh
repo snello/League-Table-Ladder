@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
 # deploy.sh — sync league ladder to S3 and invalidate changed CloudFront paths
 #
-# Usage: ./deploy.sh [--force-invalidation]
-#   --force-invalidation   invalidate /* even if no files changed
+# Usage: ./deploy.sh [--force-invalidation] [--force-sync]
+#   --force-invalidation   invalidate /projects/league-ladder/* even if no files changed
+#   --force-sync           re-upload every site asset (including index.html and favicons)
+#                          and invalidate /projects/league-ladder/*
 set -euo pipefail
 
 BUCKET="${S3_BUCKET}"
 DISTRIBUTION_ID="${CLOUDFRONT_DISTRIBUTION_ID}"
 S3_HOST="${S3_HOST}"
 FORCE_INVALIDATION=false
+FORCE_SYNC=false
 
 for arg in "$@"; do
   case "$arg" in
     --force-invalidation) FORCE_INVALIDATION=true ;;
+    --force-sync)         FORCE_SYNC=true; FORCE_INVALIDATION=true ;;
     *) echo "Unknown argument: $arg"; exit 1 ;;
   esac
 done
@@ -28,24 +32,54 @@ echo "Syncing to S3…"
 
 sync_output=""
 
-# Static files at root — use cp (always uploads, no timestamp/size guessing)
-for f in data.json comps.json; do
-  if [ -f "$f" ]; then
-    sync_output+=$(aws s3 cp "$f" "$BUCKET/$f" --no-progress 2>&1)
+if [ "$FORCE_SYNC" = true ]; then
+  echo "  (force-sync: uploading all site assets)"
+
+  # HTML + favicons
+  for f in index.html favicon.svg favicon.ico apple-touch-icon.png \
+            favicon-32x32.png favicon-64x64.png favicon-128x128.png; do
+    if [ -f "$f" ]; then
+      sync_output+=$(aws s3 cp "$f" "$BUCKET/$f" --no-progress 2>&1)
+      sync_output+=$'\n'
+    fi
+  done
+
+  # Data files
+  for f in data.json comps.json; do
+    if [ -f "$f" ]; then
+      sync_output+=$(aws s3 cp "$f" "$BUCKET/$f" --no-progress 2>&1)
+      sync_output+=$'\n'
+    fi
+  done
+
+  # Directories — use cp --recursive to bypass sync's change detection
+  if [ -d images ]; then
+    sync_output+=$(aws s3 cp images/ "$BUCKET/images/" --recursive --no-progress 2>&1)
     sync_output+=$'\n'
   fi
-done
+  if [ -d fixtures ]; then
+    sync_output+=$(aws s3 cp fixtures/ "$BUCKET/fixtures/" --recursive --no-progress 2>&1)
+    sync_output+=$'\n'
+  fi
 
-# Team badge images (skip silently if directory doesn't exist yet)
-if [ -d images ]; then
-  sync_output+=$(aws s3 sync images/ "$BUCKET/images/" --no-progress 2>&1)
-  sync_output+=$'\n'
-fi
+else
+  # Normal sync: only upload changed data/image/fixture files
+  for f in data.json comps.json; do
+    if [ -f "$f" ]; then
+      sync_output+=$(aws s3 cp "$f" "$BUCKET/$f" --no-progress 2>&1)
+      sync_output+=$'\n'
+    fi
+  done
 
-# Fixture JSON files (skip silently if directory doesn't exist yet)
-if [ -d fixtures ]; then
-  sync_output+=$(aws s3 sync fixtures/ "$BUCKET/fixtures/" --no-progress 2>&1)
-  sync_output+=$'\n'
+  if [ -d images ]; then
+    sync_output+=$(aws s3 sync images/ "$BUCKET/images/" --no-progress 2>&1)
+    sync_output+=$'\n'
+  fi
+
+  if [ -d fixtures ]; then
+    sync_output+=$(aws s3 sync fixtures/ "$BUCKET/fixtures/" --no-progress 2>&1)
+    sync_output+=$'\n'
+  fi
 fi
 
 # Print what was uploaded
@@ -74,8 +108,8 @@ fi
 
 echo ""
 if [ "$FORCE_INVALIDATION" = true ]; then
-  echo "Force-invalidating /* on CloudFront…"
-  invalidation_paths=("/*")
+  echo "Invalidating /projects/league-ladder/* on CloudFront…"
+  invalidation_paths=("/projects/league-ladder/*")
 else
   echo "Invalidating ${#cf_paths[@]} path(s) on CloudFront…"
   printf '  %s\n' "${cf_paths[@]}"
