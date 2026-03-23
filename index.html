@@ -28,7 +28,6 @@
                 --rung-filled: rgba(212, 175, 55, 0.8);
                 --badge-size: 38px;
                 --rung-h: 22px;
-                --rung-h-occ: 36px;
                 --label-w: 32px;
                 --rail-w: 6px;
                 --font: "Inter", -apple-system, sans-serif;
@@ -161,7 +160,7 @@
             }
 
             .rung.occ {
-                min-height: var(--rung-h-occ);
+                min-height: var(--rung-h);
             }
 
             .rung-lbl {
@@ -191,12 +190,14 @@
 
             .rung-bar {
                 flex: 1;
-                align-self: stretch;
+                position: relative;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 gap: 10px;
-                position: relative;
+                height: 0;
+                align-self: center;
+                overflow: visible;
             }
 
             /* Horizontal rung line */
@@ -205,8 +206,7 @@
                 position: absolute;
                 left: var(--rail-w);
                 right: var(--rail-w);
-                top: 50%;
-                transform: translateY(-50%);
+                top: 0;
                 height: 2px;
                 background: var(--rung-empty);
                 pointer-events: none;
@@ -821,7 +821,6 @@
                 :root {
                     --badge-size: 48px;
                     --rung-h: 25px;
-                    --rung-h-occ: 42px;
                     --label-w: 38px;
                 }
                 .page-header {
