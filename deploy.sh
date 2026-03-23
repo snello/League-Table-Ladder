@@ -45,7 +45,7 @@ if [ "$FORCE_SYNC" = true ]; then
   done
 
   # Data files
-  for f in data.json comps.json; do
+  for f in data.json comps.json index.html; do
     if [ -f "$f" ]; then
       sync_output+=$(aws s3 cp "$f" "$BUCKET/$f" --no-progress 2>&1)
       sync_output+=$'\n'
@@ -64,7 +64,7 @@ if [ "$FORCE_SYNC" = true ]; then
 
 else
   # Normal sync: only upload changed data/image/fixture files
-  for f in data.json comps.json; do
+  for f in data.json comps.json index.html; do
     if [ -f "$f" ]; then
       sync_output+=$(aws s3 cp "$f" "$BUCKET/$f" --no-progress 2>&1)
       sync_output+=$'\n'
@@ -90,7 +90,7 @@ echo "$sync_output" | grep "^upload:" || echo "  (nothing changed)"
 # Extract CloudFront paths from upload lines:
 #   "upload: foo to ${S3_BUCKET}/foo"
 #   → "/projects/league-ladder/foo"
-cf_paths=()
+cf_paths=("/projects/league-ladder/")
 while IFS= read -r line; do
   cf_paths+=("$line")
 done < <(
@@ -109,7 +109,7 @@ fi
 echo ""
 if [ "$FORCE_INVALIDATION" = true ]; then
   echo "Invalidating /projects/league-ladder/* on CloudFront…"
-  invalidation_paths=("/projects/league-ladder/*")
+  invalidation_paths=("/projects/league-ladder/" "/projects/league-ladder/*")
 else
   echo "Invalidating ${#cf_paths[@]} path(s) on CloudFront…"
   printf '  %s\n' "${cf_paths[@]}"
