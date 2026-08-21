@@ -11,11 +11,9 @@
  *   FOOTBALL_DATA_API_KEY=<key> node fetch-standings.mjs --league BL1 --season 2024
  *   FOOTBALL_DATA_API_KEY=<key> node fetch-standings.mjs --league SA --out data.json
  *
- * data.json structure:
- *   {
- *     "PL":  { "name": "Premier League", "season": "2025", "matchday": 31, "teams": [...] },
- *     "BL1": { "name": "Bundesliga",     "season": "2025", "matchday": 28, "teams": [...] }
- *   }
+ * data.json stores multiple seasons per league:
+ *   { "PL": { "name": "Premier League", "defaultSeason": "2026",
+ *     "seasons": { "2026": { "matchday": 1, "teams": [...] } } } }
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
@@ -27,7 +25,7 @@ import { join, dirname } from "path";
 const { values: args } = parseArgs({
   options: {
     league: { type: "string", default: "PL" },
-    season: { type: "string", default: "2025" },
+    season: { type: "string", default: "2026" },
     out: { type: "string", default: "data.json" },
   },
   strict: false,
@@ -151,6 +149,22 @@ if (existsSync(outPath)) {
     const raw = JSON.parse(readFileSync(outPath, "utf8"));
     // Handle legacy format (plain array) by wrapping it under PL
     existing = Array.isArray(raw) ? { PL: { teams: raw } } : raw;
+    for (const [code, league] of Object.entries(existing)) {
+      if (league?.teams && !league.seasons) {
+        const legacySeason = league.season ?? "2025";
+        existing[code] = {
+          name: league.name,
+          defaultSeason: legacySeason,
+          legacyFixtureSeason: legacySeason,
+          seasons: {
+            [legacySeason]: {
+              matchday: league.matchday,
+              teams: league.teams,
+            },
+          },
+        };
+      }
+    }
   } catch {
     console.warn(
       "  Warning: could not parse existing data.json — starting fresh.",
@@ -158,18 +172,25 @@ if (existsSync(outPath)) {
   }
 }
 
-existing[LEAGUE] = {
+const leagueData = existing[LEAGUE] ?? {
   name: apiData.competition.name,
-  season: args.season,
+  defaultSeason: args.season,
+  seasons: {},
+};
+leagueData.name = apiData.competition.name;
+if (!leagueData.defaultSeason || Number(args.season) >= Number(leagueData.defaultSeason)) {
+  leagueData.defaultSeason = args.season;
+}
+leagueData.seasons = leagueData.seasons ?? {};
+leagueData.seasons[args.season] = {
   matchday: apiData.season.currentMatchday,
   teams: transform(apiData),
 };
+existing[LEAGUE] = leagueData;
 
 writeFileSync(outPath, JSON.stringify(existing, null, 2));
 
-console.log(
-  `Wrote ${existing[LEAGUE].teams.length} teams under "${LEAGUE}" → ${args.out}`,
-);
+console.log(`Wrote ${existing[LEAGUE].seasons[args.season].teams.length} teams under "${LEAGUE}" season ${args.season} → ${args.out}`);
 console.log(`Matchday: ${apiData.season.currentMatchday}`);
 
 // ─── Download missing team logos ──────────────────────────────────────────────
@@ -178,7 +199,7 @@ const imgDir = join(baseDir, "images", LEAGUE);
 mkdirSync(imgDir, { recursive: true });
 
 let imagesUpdated = false;
-for (const team of existing[LEAGUE].teams) {
+for (const team of existing[LEAGUE].seasons[args.season].teams) {
   if (!team.crest) continue;
 
   // Derive extension from the crest URL (e.g. ".png", ".svg")
@@ -213,16 +234,16 @@ if (imagesUpdated) {
 }
 
 // ─── Fetch remaining fixtures for each team ───────────────────────────────────
-const fixturesDir = join(baseDir, "fixtures", LEAGUE);
+const fixturesDir = join(baseDir, "fixtures", LEAGUE, args.season);
 mkdirSync(fixturesDir, { recursive: true });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const today = new Date().toISOString().split("T")[0]; // e.g. "2026-03-15"
+const seasonStart = apiData.season.startDate ?? `${args.season}-08-01`;
 const seasonEnd = apiData.season.endDate ?? "2026-12-31";
 
 console.log("\nFetching fixtures…");
-for (const team of existing[LEAGUE].teams) {
+for (const team of existing[LEAGUE].seasons[args.season].teams) {
   const fixtureFile = join(fixturesDir, `${team.id}.json`);
 
   if (existsSync(fixtureFile)) {
@@ -232,11 +253,11 @@ for (const team of existing[LEAGUE].teams) {
 
   await sleep(6200);
 
-  // dateFrom instead of status=SCHEDULED so that TIMED (today's) matches are included
+  // Fetch the whole season so archived seasons retain their completed fixtures.
   // competitions filter requires the numeric ID, not the string code
   const fixtureEndpoint =
     `https://api.football-data.org/v4/teams/${team.id}/matches` +
-    `?season=${args.season}&competitions=${apiData.competition.id}&dateFrom=${today}&dateTo=${seasonEnd}`;
+    `?season=${args.season}&competitions=${apiData.competition.id}&dateFrom=${seasonStart}&dateTo=${seasonEnd}`;
 
   try {
     process.stdout.write(`  ${team.name}: fetching… `);
