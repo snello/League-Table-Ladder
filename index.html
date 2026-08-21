@@ -99,6 +99,46 @@
                 margin-top: 3px;
             }
 
+            .header-controls {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-left: auto;
+            }
+
+            .season-control {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                color: rgba(255, 255, 255, 0.4);
+                font-size: 9px;
+                font-weight: 700;
+                letter-spacing: 0.7px;
+                text-transform: uppercase;
+                white-space: nowrap;
+            }
+
+            .season-select {
+                max-width: 92px;
+                background: rgba(255, 255, 255, 0.06);
+                border: 1px solid rgba(212, 175, 55, 0.35);
+                border-radius: 5px;
+                color: #fff;
+                font: 700 12px var(--font);
+                padding: 6px 5px;
+                cursor: pointer;
+            }
+
+            .season-select:disabled {
+                opacity: 0.55;
+                cursor: default;
+            }
+
+            .season-select option {
+                background: #1a0030;
+                color: #fff;
+            }
+
             /* ── Scroll hint ── */
             .hint {
                 text-align: center;
@@ -848,6 +888,9 @@
                 .stats-grid {
                     grid-template-columns: repeat(6, 1fr);
                 }
+                .season-select {
+                    max-width: 110px;
+                }
             }
 
             /* ── Mode tabs ── */
@@ -934,6 +977,12 @@
                 <select class="league-select" id="leagueSelect"></select>
                 <p id="headerSub">Points Ladder &middot; Loading&hellip;</p>
             </div>
+            <div class="header-controls">
+                <label class="season-control" for="seasonSelect">
+                    <span>Season</span>
+                    <select class="season-select" id="seasonSelect" aria-label="Season"></select>
+                </label>
+            </div>
         </header>
 
         <div class="mode-tabs">
@@ -1018,6 +1067,7 @@
             // ─── Team data (loaded from data.json) ───────────────────────────────────────
             let TEAMS = [];
             let currentLeagueId = "PL";
+            let currentSeason = null;
             let teamFixtures = {}; // { [teamId]: [...matchObjects] }
             let fixturesLeagueId = null;
             let pickerMatchId = null;
@@ -1026,7 +1076,7 @@
 
             // ─── Fixture result storage ───────────────────────────────────────────────────
             function resultsKey() {
-                return `ladder_${currentLeagueId}_results`;
+                return `ladder_${currentLeagueId}_${currentSeason}_results`;
             }
             function getResults() {
                 return JSON.parse(localStorage.getItem(resultsKey()) ?? "{}");
@@ -1072,11 +1122,11 @@
                 const recent = team.form.slice(0, n);
                 const ppg = recent.reduce((s, r) => s + resultPts(r), 0) / n;
                 let fixtures = teamFixtures[team.id];
-                fixtures = fixtures.filter((f) => new Date(f.utcDate) >= new Date());
                 if (!fixtures) {
                     const gamesRemaining = (TEAMS.length - 1) * 2 - team.played;
                     return Math.round(team.pts + ppg * gamesRemaining);
                 }
+                fixtures = fixtures.filter((f) => new Date(f.utcDate) >= new Date());
 
                 // Use fixture data + user-set results
                 const results = getResults();
@@ -1368,7 +1418,7 @@
                     btn.classList.add("active");
                     currentMode = btn.dataset.mode;
                     document.getElementById("formControls").classList.toggle("visible", currentMode === "final");
-                    if (currentMode === "final") await loadFixtures(currentLeagueId);
+                    if (currentMode === "final") await loadFixtures(currentLeagueId, currentSeason);
                     buildLadder();
                 });
             });
@@ -1381,28 +1431,64 @@
             // ─── Initial build (fetch data + comps then render) ───────────────────────────
             let allData = {};
             let allComps = [];
+            const cacheBustToken = "20260501213726479-e53bf7";
 
-            async function loadFixtures(leagueId) {
-                if (fixturesLeagueId === leagueId) return;
+            async function loadFixtures(leagueId, season = currentSeason) {
+                const fixtureKey = `${leagueId}_${season}`;
+                if (fixturesLeagueId === fixtureKey) return;
                 teamFixtures = {};
                 await Promise.all(
                     TEAMS.map(async (team) => {
                         try {
-                            const r = await fetch(`fixtures/${leagueId}/${team.id}.json`);
+                            let r = await fetch(`fixtures/${leagueId}/${season}/${team.id}.json`);
+                            const legacySeason = allData[leagueId]?.legacyFixtureSeason;
+                            if (!r.ok && String(season) === String(legacySeason)) {
+                                r = await fetch(`fixtures/${leagueId}/${team.id}.json`);
+                            }
                             if (r.ok) teamFixtures[team.id] = await r.json();
                         } catch {
                             /* fixture file may not exist yet */
                         }
                     }),
                 );
-                fixturesLeagueId = leagueId;
+                fixturesLeagueId = fixtureKey;
             }
 
-            function switchLeague(leagueId) {
+            function seasonLabel(season) {
+                const start = parseInt(season, 10);
+                return Number.isFinite(start) ? `${start}/${String(start + 1).slice(-2)}` : season;
+            }
+
+            function normalizeLeague(raw) {
+                if (raw?.seasons && typeof raw.seasons === "object") return raw;
+                const legacySeason = raw?.season ?? "2025";
+                return {
+                    name: raw?.name,
+                    defaultSeason: legacySeason,
+                    legacyFixtureSeason: legacySeason,
+                    seasons: {
+                        [legacySeason]: {
+                            matchday: raw?.matchday,
+                            teams: raw?.teams ?? [],
+                        },
+                    },
+                };
+            }
+
+            function availableSeasons(league) {
+                return Object.keys(league.seasons ?? {}).sort((a, b) => parseInt(b, 10) - parseInt(a, 10));
+            }
+
+            function switchLeague(leagueId, season = null) {
                 currentLeagueId = leagueId;
-                fixturesLeagueId = null; // invalidate fixture cache on league change
                 const league = allData[leagueId] ?? Object.values(allData)[0];
-                TEAMS = league.teams;
+                const seasons = availableSeasons(league);
+                currentSeason = seasons.includes(String(season))
+                    ? String(season)
+                    : String(league.defaultSeason ?? seasons[0]);
+                const seasonData = league.seasons[currentSeason] ?? league.seasons[seasons[0]];
+                TEAMS = seasonData.teams ?? [];
+                fixturesLeagueId = null;
 
                 // Update emblem
                 const comp = allComps.find((c) => c.code === leagueId);
@@ -1411,28 +1497,33 @@
                 emblemEl.alt = comp?.name ?? leagueId;
 
                 // Update subtitle
-                const season = league.season ? `${league.season}/${String(parseInt(league.season) + 1).slice(2)}` : "";
-                const md = league.matchday ? `Matchday ${league.matchday}` : "";
-                document.getElementById("headerSub").textContent = ["Points Ladder", season, md].filter(Boolean).join(" · ");
+                const md = seasonData.matchday ? `Matchday ${seasonData.matchday}` : "";
+                document.getElementById("headerSub").textContent = ["Points Ladder", seasonLabel(currentSeason), md].filter(Boolean).join(" · ");
 
                 // Sync select value
                 document.getElementById("leagueSelect").value = leagueId;
+                const seasonSelect = document.getElementById("seasonSelect");
+                seasonSelect.innerHTML = seasons.map((item) => `<option value="${item}">${seasonLabel(item)}</option>`).join("");
+                seasonSelect.value = currentSeason;
+                seasonSelect.disabled = seasons.length < 2;
 
                 // Update URL without reload
                 const url = new URL(window.location);
                 url.searchParams.set("leagueid", leagueId);
+                url.searchParams.set("season", currentSeason);
                 history.replaceState(null, "", url);
 
                 if (currentMode === "final") {
-                    loadFixtures(leagueId).then(() => buildLadder());
+                    loadFixtures(leagueId, currentSeason).then(() => buildLadder());
                 } else {
                     buildLadder();
                 }
             }
 
-            Promise.all([fetch("data.json").then((r) => r.json()), fetch("comps.json").then((r) => r.json())])
+            Promise.all([fetch(`data.json?v=${cacheBustToken}`).then((r) => r.json()), fetch(`comps.json?v=${cacheBustToken}`).then((r) => r.json())])
                 .then(([data, comps]) => {
-                    allData = Array.isArray(data) ? { PL: { teams: data } } : data;
+                    const rawData = Array.isArray(data) ? { PL: { teams: data } } : data;
+                    allData = Object.fromEntries(Object.entries(rawData).map(([key, value]) => [key, normalizeLeague(value)]));
                     allComps = comps.competitions ?? [];
 
                     // Populate select with only leagues present in data.json
@@ -1456,9 +1547,11 @@
                     });
 
                     select.addEventListener("change", (e) => switchLeague(e.target.value));
+                    document.getElementById("seasonSelect").addEventListener("change", (e) => switchLeague(currentLeagueId, e.target.value));
 
-                    const leagueId = new URLSearchParams(window.location.search).get("leagueid") ?? (availableKeys.includes("PL") ? "PL" : availableKeys[0]);
-                    switchLeague(leagueId);
+                    const params = new URLSearchParams(window.location.search);
+                    const leagueId = params.get("leagueid") ?? (availableKeys.includes("PL") ? "PL" : availableKeys[0]);
+                    switchLeague(leagueId, params.get("season"));
                 })
                 .catch((err) => {
                     document.querySelector(".hint").textContent = "Failed to load data — " + err.message;
