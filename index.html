@@ -1094,7 +1094,7 @@
                 return stored === "AWAY_WIN" ? "W" : "L";
             }
 
-            const badgeUrl = (team) => team.image ?? (team.code ? `https://resources.premierleague.com/premierleague/badges/70/t${team.code}.png` : null);
+            const badgeUrl = (team) => team.image ?? team.crest ?? (team.code ? `https://resources.premierleague.com/premierleague/badges/70/t${team.code}.png` : null);
 
             function initials(name) {
                 const w = name.split(" ");
@@ -1431,7 +1431,7 @@
             // ─── Initial build (fetch data + comps then render) ───────────────────────────
             let allData = {};
             let allComps = [];
-            const cacheBustToken = "20260501213726479-e53bf7";
+            const cacheBustToken = "20260823214345683-67098a";
 
             async function loadFixtures(leagueId, season = currentSeason) {
                 const fixtureKey = `${leagueId}_${season}`;

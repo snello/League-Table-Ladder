@@ -43,13 +43,10 @@ if (!API_KEY) {
   process.exit(1);
 }
 
-// ─── Team metadata ────────────────────────────────────────────────────────────
-// Keyed by football-data.org team ID.
-// code  → Premier League badge CDN id (resources.premierleague.com/…/t{code}.png)
-// color → primary club colour used for badge ring
-// short → display name used in the app
-// Note: teams from other leagues will fall back to shortName / crest URL / #888888
-const TEAM_META = {
+// ─── Optional team overrides ─────────────────────────────────────────────────
+// API data is authoritative. These overrides only provide preferred display
+// names, ring colours, and Premier League CDN badge codes where known.
+const TEAM_OVERRIDES = {
   // Premier League
   57: { code: 3, color: "#EF0107", short: "Arsenal" },
   65: { code: 43, color: "#6CABDD", short: "Man City" },
@@ -73,6 +70,24 @@ const TEAM_META = {
   76: { code: 39, color: "#FDB913", short: "Wolves" },
 };
 
+const FALLBACK_COLORS = [
+  "#4F8CFF",
+  "#7D5CFF",
+  "#E45BFF",
+  "#FF5F8F",
+  "#FF7A45",
+  "#F2C94C",
+  "#38C98A",
+  "#35B9C8",
+];
+
+function fallbackColor(team) {
+  const key = String(team.id ?? team.name);
+  let hash = 0;
+  for (const char of key) hash = (hash * 31 + char.charCodeAt(0)) | 0;
+  return FALLBACK_COLORS[Math.abs(hash) % FALLBACK_COLORS.length];
+}
+
 // ─── Transform ────────────────────────────────────────────────────────────────
 function transform(apiData) {
   const total = apiData.standings.find((s) => s.type === "TOTAL");
@@ -80,13 +95,7 @@ function transform(apiData) {
     throw new Error("No TOTAL standings table found in API response.");
 
   return total.table.map((entry) => {
-    const meta = TEAM_META[entry.team.id];
-    if (!meta) {
-      console.warn(
-        `  Warning: no metadata for team ID ${entry.team.id} ` +
-          `(${entry.team.name}) — add an entry to TEAM_META for badge/colour.`,
-      );
-    }
+    const meta = TEAM_OVERRIDES[entry.team.id];
 
     // Strip trailing "FC" / "AFC" suffixes ("Arsenal FC" → "Arsenal",
     // "Sunderland AFC" → "Sunderland"). Leading "AFC Bournemouth" is unchanged.
@@ -104,7 +113,7 @@ function transform(apiData) {
       id: entry.team.id,
       pos: entry.position,
       name,
-      short: meta?.short ?? entry.team.shortName,
+      short: meta?.short ?? entry.team.shortName ?? name,
       played: entry.playedGames,
       won: entry.won,
       drawn: entry.draw,
@@ -114,7 +123,7 @@ function transform(apiData) {
       gd: entry.goalDifference,
       pts: entry.points,
       code: meta?.code ?? null,
-      color: meta?.color ?? "#888888",
+      color: meta?.color ?? fallbackColor(entry.team),
       crest: entry.team.crest ?? null,
       form,
     };
