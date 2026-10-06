@@ -21,7 +21,7 @@ trap on_error ERR
 
 AWS_BIN="${AWS_BIN:-$(command -v aws 2>/dev/null || true)}"
 if [ -z "$AWS_BIN" ]; then
-  for candidate in /usr/bin/aws /usr/local/bin/aws /home/snello/.local/bin/aws; do
+  for candidate in /usr/bin/aws /usr/local/bin/aws ~/.local/bin/aws; do
     if [ -x "$candidate" ]; then
       AWS_BIN="$candidate"
       break
