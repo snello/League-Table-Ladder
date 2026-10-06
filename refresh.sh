@@ -21,7 +21,7 @@ if [ -z "$NODE_BIN" ]; then
 fi
 
 # Load secrets from a file that is readable only by the cron user.
-ENV_FILE="${LEAGUE_LADDER_ENV_FILE:-/home/snello/.config/league-ladder.env}"
+ENV_FILE="${LEAGUE_LADDER_ENV_FILE:-$HOME/.config/league-ladder.env}"
 if [ -f "$ENV_FILE" ]; then
   . "$ENV_FILE"
 fi
