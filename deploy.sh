@@ -159,7 +159,7 @@ log "Changed files uploaded: $changed_count"
 # ── CloudFront invalidation ───────────────────────────────────────────────────
 
 # Extract CloudFront paths from upload lines:
-#   "upload: foo to s3://oliver.snell.me/projects/league-ladder/foo"
+#   "upload: foo to ${S3_BUCKET}/foo"
 #   → "/projects/league-ladder/foo"
 cf_paths=()
 while IFS= read -r line; do
