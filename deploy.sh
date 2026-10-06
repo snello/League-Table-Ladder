@@ -46,11 +46,25 @@ run_aws() {
   fi
 }
 
-BUCKET="${S3_BUCKET}"
-DISTRIBUTION_ID="${CLOUDFRONT_DISTRIBUTION_ID}"
-S3_HOST="${S3_HOST}"
+BUCKET="${S3_BUCKET:-}"
+DISTRIBUTION_ID="${CLOUDFRONT_DISTRIBUTION_ID:-}"
+S3_HOST="${S3_HOST:-}"
 FORCE_INVALIDATION=false
 FORCE_SYNC=false
+
+# Validate required environment variables
+if [ -z "$BUCKET" ]; then
+  log "ERROR: S3_BUCKET environment variable is not set." >&2
+  exit 1
+fi
+if [ -z "$DISTRIBUTION_ID" ]; then
+  log "ERROR: CLOUDFRONT_DISTRIBUTION_ID environment variable is not set." >&2
+  exit 1
+fi
+if [ -z "$S3_HOST" ]; then
+  log "ERROR: S3_HOST environment variable is not set." >&2
+  exit 1
+fi
 
 for arg in "$@"; do
   case "$arg" in
@@ -145,7 +159,7 @@ log "Changed files uploaded: $changed_count"
 # ── CloudFront invalidation ───────────────────────────────────────────────────
 
 # Extract CloudFront paths from upload lines:
-#   "upload: foo to ${S3_BUCKET}/foo"
+#   "upload: foo to s3://oliver.snell.me/projects/league-ladder/foo"
 #   → "/projects/league-ladder/foo"
 cf_paths=()
 while IFS= read -r line; do
