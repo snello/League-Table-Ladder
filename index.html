@@ -156,7 +156,7 @@
                 justify-content: center;
                 padding: 4px 14px 180px;
                 flex: 1;
-                align-items: flex-start;
+                align-items: stretch;
                 min-height: 0;
             }
 
@@ -164,6 +164,9 @@
                 position: relative;
                 width: 100%;
                 max-width: 580px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
             }
 
             /* Rails */
@@ -196,12 +199,16 @@
             #rungs {
                 position: relative;
                 z-index: 1;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
             }
 
             .rung {
                 display: flex;
                 align-items: center;
                 min-height: var(--rung-h);
+                flex: 1;
             }
 
             .rung.occ {
