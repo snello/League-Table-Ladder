@@ -30,6 +30,7 @@
                 --rung-h: 22px;
                 --label-w: 32px;
                 --rail-w: 6px;
+                --gutter: 14px;
                 --font: "Inter", -apple-system, sans-serif;
             }
 
@@ -154,7 +155,7 @@
             .ladder-outer {
                 display: flex;
                 justify-content: center;
-                padding: 4px 14px 180px;
+                padding: 4px var(--gutter) 0;
                 flex: 1;
                 align-items: stretch;
                 min-height: 0;
@@ -199,7 +200,6 @@
             #rungs {
                 position: relative;
                 z-index: 1;
-                flex: 1;
                 display: flex;
                 flex-direction: column;
             }
@@ -208,6 +208,13 @@
                 display: flex;
                 align-items: center;
                 min-height: var(--rung-h);
+            }
+
+            .ladder-outer.fill #rungs {
+                flex: 1;
+            }
+
+            .ladder-outer.fill .rung {
                 flex: 1;
             }
 
@@ -872,6 +879,7 @@
             @media (min-width: 580px) {
                 :root {
                     --badge-size: 48px;
+                    --gutter: 24px;
                     --rung-h: 25px;
                     --label-w: 38px;
                 }
@@ -882,7 +890,7 @@
                     font-size: 18px;
                 }
                 .ladder-outer {
-                    padding: 6px 24px 200px;
+                    padding: 6px var(--gutter) 0;
                 }
                 .token-name {
                     font-size: 10px;
@@ -909,8 +917,9 @@
             .mode-tabs {
                 display: flex;
                 gap: 0;
-                padding: 12px 14px 0;
-                max-width: 580px;
+                padding: 12px var(--gutter) 0;
+                width: 100%;
+                max-width: calc(580px + 2 * var(--gutter));
                 margin: 0 auto;
             }
             .mode-tab {
@@ -1154,6 +1163,23 @@
                 const unset = fixtures.length - userCount;
                 return Math.round(team.pts + userPts + ppg * unset);
             }
+
+            // ─── Fit ladder to viewport ───────────────────────────────────────────────────
+            // If the ladder at normal spacing is shorter than the space below it, stretch
+            // the rungs to fill that space. Otherwise leave normal spacing.
+            function fitLadder() {
+                const outer = document.querySelector(".ladder-outer");
+                const rungs = document.getElementById("rungs");
+                outer.classList.remove("fill");
+                const natural = rungs.offsetHeight;
+                const top = rungs.getBoundingClientRect().top + window.scrollY;
+                const available = window.innerHeight - top;
+                outer.classList.toggle("fill", natural < available);
+            }
+
+            window.addEventListener("resize", fitLadder);
+            window.addEventListener("load", fitLadder);
+            document.fonts.ready.then(fitLadder);
 
             // ─── Build ladder ─────────────────────────────────────────────────────────────
             function buildLadder(keepToast = false) {
@@ -1410,6 +1436,7 @@
 
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
+                        fitLadder();
                         addZone("zone-ucl", uclMax, uclMin);
                         addZone("zone-rel", relMax, relMin);
                         if (doScroll) {
