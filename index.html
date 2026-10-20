@@ -1198,6 +1198,7 @@
                 });
 
                 const maxDisplayPts = Math.max(...teamData.map((t) => t.displayPts));
+                const minDisplayPts = Math.min(...teamData.map((t) => t.displayPts));
                 const relThreshold = teamData.length - 2; // bottom 3 are always relegated
 
                 // Group by display pts
@@ -1214,12 +1215,12 @@
                 // Update hint text
                 document.querySelector(".hint").textContent =
                     currentMode === "current"
-                        ? `Points 0 – ${maxDisplayPts} · Tap a team for stats`
+                        ? `Points ${minDisplayPts} – ${maxDisplayPts} · Tap a team for stats`
                         : `Projected final pts · Last ${formGames} game${formGames > 1 ? "s" : ""} of form · Tap a team for stats`;
 
                 const rungEls = {};
 
-                for (let p = maxDisplayPts; p >= 0; p--) {
+                for (let p = maxDisplayPts; p >= minDisplayPts; p--) {
                     const teams = byPts[p];
                     const rung = document.createElement("div");
                     rung.className = "rung" + (teams ? " occ" : "");
