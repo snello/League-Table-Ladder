@@ -3,6 +3,13 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+# Load secrets (and optionally NODE_BIN) from a file that is readable only by
+# the cron user. This runs first so NODE_BIN can be set there.
+ENV_FILE="${LEAGUE_LADDER_ENV_FILE:-$HOME/.config/league-ladder.env}"
+if [ -f "$ENV_FILE" ]; then
+  . "$ENV_FILE"
+fi
+
 # Cron does not load the interactive shell's PATH. Allow NODE_BIN to be
 # configured explicitly, then check the usual system installation paths.
 NODE_BIN="${NODE_BIN:-$(command -v node 2>/dev/null || true)}"
@@ -18,12 +25,6 @@ fi
 if [ -z "$NODE_BIN" ]; then
   echo "Error: Node.js was not found. Set NODE_BIN to the node executable." >&2
   exit 1
-fi
-
-# Load secrets from a file that is readable only by the cron user.
-ENV_FILE="${LEAGUE_LADDER_ENV_FILE:-$HOME/.config/league-ladder.env}"
-if [ -f "$ENV_FILE" ]; then
-  . "$ENV_FILE"
 fi
 
 if [ -z "${FOOTBALL_DATA_API_KEY:-}" ]; then
