@@ -63,7 +63,7 @@ When you tap a team, view:
 
 **Final Positions** — Projected final standings
 - Estimates final points based on recent form
-- Adjustable form window (last 1-5 games)
+- Adjustable form window (last 1-5 games, or All Season pts per game)
 - Set predicted results for remaining fixtures
 - Dynamic projection updates as results are set
 
@@ -135,7 +135,7 @@ The `refresh.sh` script:
 ### View Team Details
 - **Tap any team** to see full statistics
 - **Toggle modes** to switch between current and projected standings
-- **Adjust form window** (1–5 games) to change projection sensitivity
+- **Adjust form window** (1–5 games, or All Season) to change projection sensitivity
 
 ### Set Predicted Results
 In **Final Positions** mode:

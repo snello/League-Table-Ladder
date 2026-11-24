@@ -1011,15 +1011,16 @@
             <button class="mode-tab" data-mode="final">Final Positions</button>
         </div>
         <div class="form-controls" id="formControls">
-            <span class="form-ctrl-label">Using last</span>
+            <span class="form-ctrl-label" id="formPrefix">Using last</span>
             <select id="formSelect">
                 <option value="1">1 game</option>
                 <option value="2">2 games</option>
                 <option value="3" selected>3 games</option>
                 <option value="4">4 games</option>
                 <option value="5">5 games</option>
+                <option value="all">All Season</option>
             </select>
-            <span class="form-ctrl-label">of form to project final points</span>
+            <span class="form-ctrl-label" id="formSuffix">of form to project final points</span>
         </div>
 
         <p class="hint">Points 0 &ndash; 100 &nbsp;&bull;&nbsp; ↓ Scroll down to see all teams</p>
@@ -1139,9 +1140,23 @@
                 return r === "W" ? 3 : r === "D" ? 1 : 0;
             }
 
+            // Points per game across every game played so far this season
+            function seasonPpg(team) {
+                return team.played ? team.pts / team.played : 0;
+            }
+
+            function formLabel() {
+                return formGames === "all" ? "Season pts per game" : `Last ${formGames} game${formGames > 1 ? "s" : ""} of form`;
+            }
+
             function calcProjectedPts(team, n) {
-                const recent = team.form.slice(0, n);
-                const ppg = recent.reduce((s, r) => s + resultPts(r), 0) / n;
+                let ppg;
+                if (n === "all") {
+                    ppg = seasonPpg(team);
+                } else {
+                    const recent = team.form.slice(0, n);
+                    ppg = recent.length ? recent.reduce((s, r) => s + resultPts(r), 0) / recent.length : 0;
+                }
                 let fixtures = teamFixtures[team.id];
                 if (!fixtures) {
                     const gamesRemaining = (TEAMS.length - 1) * 2 - team.played;
@@ -1216,7 +1231,7 @@
                 document.querySelector(".hint").textContent =
                     currentMode === "current"
                         ? `Points ${minDisplayPts} – ${maxDisplayPts} · Tap a team for stats`
-                        : `Projected final pts · Last ${formGames} game${formGames > 1 ? "s" : ""} of form · Tap a team for stats`;
+                        : `Projected final pts · ${formLabel()} · Tap a team for stats`;
 
                 const rungEls = {};
 
@@ -1464,7 +1479,10 @@
             });
 
             document.getElementById("formSelect").addEventListener("change", (e) => {
-                formGames = parseInt(e.target.value);
+                const isAll = e.target.value === "all";
+                formGames = isAll ? "all" : parseInt(e.target.value);
+                document.getElementById("formPrefix").textContent = isAll ? "Using" : "Using last";
+                document.getElementById("formSuffix").textContent = isAll ? "pts per game to project final points" : "of form to project final points";
                 buildLadder();
             });
 
@@ -1621,12 +1639,15 @@
                 document.getElementById("tPlayedLbl").textContent = isFinal ? "to play" : "played";
 
                 const gdStr = (team.gd >= 0 ? "+" : "") + team.gd;
-                const recentForm = team.form.slice(0, formGames).join(" ");
+                const formStat =
+                    formGames === "all"
+                        ? { v: seasonPpg(team).toFixed(2), k: "Pts / game" }
+                        : { v: team.form.slice(0, formGames).join(" "), k: `Last ${formGames}` };
                 const stats = isFinal
                     ? [
                           { v: team.pts, k: "Current pts", cls: "" },
                           { v: team.displayPts, k: "Projected", cls: "" },
-                          { v: recentForm, k: `Last ${formGames}`, cls: "" },
+                          { ...formStat, cls: "" },
                           { v: team.won, k: "Won", cls: "" },
                           { v: team.drawn, k: "Drawn", cls: "" },
                           { v: gdStr, k: "GD", cls: team.gd > 0 ? "pos" : team.gd < 0 ? "neg" : "" },
